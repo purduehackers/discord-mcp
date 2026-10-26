@@ -27,8 +27,7 @@ body {
   background: repeating-linear-gradient(to bottom, #ffe53b 0 4px, transparent 4px 12px);
   opacity: 0.4;
 }
-.scene-header,
-.scene-footer {
+.scene-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,15 +72,6 @@ body {
   font-size: 64px;
   line-height: 1.15;
   font-weight: 400;
-}
-.scene-footer {
-  position: absolute;
-  bottom: 36px;
-  left: 96px;
-  right: 96px;
-  color: #919287;
-  font-size: 21px;
-  letter-spacing: 0.02em;
 }
 .intro,
 .outro {

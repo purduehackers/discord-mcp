@@ -73,7 +73,7 @@ export function ToolRow({ children, delay = 0, detail }: ToolRowProps) {
   );
 }
 
-/** Identifies the reconstructed interaction throughout the walkthrough. */
+/** Shares the brand header and scene title across the walkthrough. */
 export function SceneShell({ children, step, title }: ShellProps) {
   return (
     <div className="scene">
@@ -88,10 +88,6 @@ export function SceneShell({ children, step, title }: ShellProps) {
       </header>
       <Reveal className="scene-title">{title}</Reveal>
       {children}
-      <footer className="scene-footer">
-        <span>OPEN SOURCE / PURDUEHACKERS / DISCORD-MCP</span>
-        <span>Recreated interaction · Public #ship posts</span>
-      </footer>
     </div>
   );
 }
