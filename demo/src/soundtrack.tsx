@@ -28,7 +28,7 @@ export function Soundtrack() {
       <Sequence name="Connection chime" from={184} durationInFrames={15}>
         <Audio src={staticFile("audio/confirm.wav")} volume={0.7} />
       </Sequence>
-      <Sequence name="Message chime" from={618} durationInFrames={15}>
+      <Sequence name="Message chime" from={798} durationInFrames={15}>
         <Audio src={staticFile("audio/confirm.wav")} volume={0.7} />
       </Sequence>
     </>

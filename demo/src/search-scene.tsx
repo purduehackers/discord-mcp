@@ -1,9 +1,10 @@
-import { interpolate, useCurrentFrame } from "remotion";
+import { Easing, interpolate, useCurrentFrame } from "remotion";
 
 import { DiscordWindow } from "./discord-window";
 import { MACID } from "./scenario.constants";
+import { ShipConversation } from "./ship-conversation";
 import { CodexHeader, TerminalPrompt, TerminalWindow } from "./terminal";
-import { Message, Reveal, SceneShell, ToolRow } from "./ui";
+import { Reveal, SceneShell, ToolRow } from "./ui";
 
 /** Recreates a lookup using public posts from Purdue Hackers' ship channel. */
 export function SearchScene() {
@@ -14,6 +15,16 @@ export function SearchScene() {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
     }),
+  );
+  const scrollOffset = interpolate(
+    frame,
+    [135, 165, 220, 250, 310, 345, 385, 415],
+    [0, 367, 367, 800, 800, 1190, 1190, 1351],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.inOut((progress) => Easing.cubic(progress)),
+    },
   );
   return (
     <SceneShell step="02 / FIND A PROJECT" title="Find a project someone shipped">
@@ -34,7 +45,7 @@ export function SearchScene() {
               </ToolRow>
               <ToolRow delay={95}>Read channel messages</ToolRow>
             </div>
-            <Reveal delay={130} className="agent-answer">
+            <Reveal delay={365} className="agent-answer">
               <strong>
                 {MACID.name}, by {MACID.author}.
               </strong>
@@ -50,36 +61,8 @@ export function SearchScene() {
           </TerminalWindow>
         </Reveal>
         <Reveal delay={50}>
-          <DiscordWindow>
-            <Message
-              name={MACID.author}
-              initials="a"
-              color="#596e56"
-              avatar="akshith.png"
-              time="Oct 11, 2026"
-            >
-              I made an app that makes Face ID work pretty seamlessly on your Mac.
-              <a className="message-link" href={MACID.repository}>
-                github.com/akshithio/macid
-              </a>
-            </Message>
-            <Reveal delay={95}>
-              <div className="date-divider">
-                <span>October 24, 2026</span>
-              </div>
-              <Message
-                name={MACID.author}
-                initials="a"
-                color="#596e56"
-                avatar="akshith.png"
-                time="12:24 PM"
-              >
-                Install works now!
-                <a className="message-link" href={MACID.website}>
-                  macid.akshith.io
-                </a>
-              </Message>
-            </Reveal>
+          <DiscordWindow scrollOffset={scrollOffset}>
+            <ShipConversation />
           </DiscordWindow>
         </Reveal>
       </div>

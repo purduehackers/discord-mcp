@@ -19,7 +19,7 @@ export function RemotionRoot() {
       <Composition
         id="DiscordMCP"
         component={DiscordDemo}
-        durationInFrames={900}
+        durationInFrames={1080}
         fps={30}
         width={1920}
         height={1080}

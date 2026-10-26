@@ -19,13 +19,13 @@ export function DiscordDemo() {
       <Sequence name="Install with your agent" from={90} durationInFrames={180}>
         <InstallScene />
       </Sequence>
-      <Sequence name="Find the conversation" from={270} durationInFrames={300}>
+      <Sequence name="Find the conversation" from={270} durationInFrames={480}>
         <SearchScene />
       </Sequence>
-      <Sequence name="Send the project links" from={570} durationInFrames={165}>
+      <Sequence name="Send the project links" from={750} durationInFrames={165}>
         <SendScene />
       </Sequence>
-      <Sequence name="Get Discord MCP" from={735} durationInFrames={165}>
+      <Sequence name="Get Discord MCP" from={915} durationInFrames={165}>
         <OutroScene />
       </Sequence>
     </AbsoluteFill>

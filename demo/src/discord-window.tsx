@@ -4,7 +4,7 @@ import type { DiscordWindowProps } from "./demo.types";
 import { DiscordMark } from "./ui";
 
 /** Keeps the conversation readable without recreating Discord's full navigation. */
-export function DiscordWindow({ children, direct = false }: DiscordWindowProps) {
+export function DiscordWindow({ children, direct = false, scrollOffset = 0 }: DiscordWindowProps) {
   return (
     <div className="discord-window">
       <div className="discord-header">
@@ -19,7 +19,13 @@ export function DiscordWindow({ children, direct = false }: DiscordWindowProps) 
           <span>{direct ? "Direct message" : "Purdue Hackers"}</span>
         </div>
       </div>
-      <div className="messages">{children}</div>
+      <div className="messages">
+        <div className="messages-viewport">
+          <div className="messages-content" style={{ transform: `translateY(-${scrollOffset}px)` }}>
+            {children}
+          </div>
+        </div>
+      </div>
       <div className="discord-composer">Message {direct ? "@Wack Hacker" : "#🚢ship"}</div>
     </div>
   );

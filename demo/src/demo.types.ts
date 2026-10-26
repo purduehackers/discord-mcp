@@ -41,4 +41,14 @@ export interface TerminalWindowProps {
 export interface DiscordWindowProps {
   children: ReactNode;
   direct?: boolean;
+  scrollOffset?: number;
+}
+
+export interface DiscordLinkPreviewProps {
+  provider: string;
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  compact?: boolean;
 }
