@@ -7,6 +7,20 @@ Each tool declares input and output schemas. Requests use Discord's official
 types; responses are validated and projected into structured MCP results.
 Discord.js handles rate limits and retries. Discord enforces token permissions.
 
+Hosted endpoint: `https://discord.purduehackers.com/mcp`. Send the caller's
+Discord token in `X-Discord-Token` on every request. For Discord OAuth tokens,
+also set `X-Discord-Auth-Prefix: Bearer`; bot tokens use the default `Bot` prefix.
+This is an explicit integration credential, separate from MCP OAuth authorization.
+The server does not store tokens or use a shared bot credential.
+
+```toml
+[mcp_servers.discord]
+url = "https://discord.purduehackers.com/mcp"
+env_http_headers = { "X-Discord-Token" = "DISCORD_BOT_TOKEN" }
+```
+
+For local stdio:
+
 ```sh
 bun install --frozen-lockfile
 # Put DISCORD_TOKEN in .env.local, then:
