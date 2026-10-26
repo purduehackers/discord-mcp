@@ -438,10 +438,8 @@ a {
 .message-body p {
   margin: 12px 0;
 }
-.message-body strong {
-  font-size: 26px;
-  font-weight: 600;
-  color: #f2f3f5;
+.message-body p:first-child {
+  margin-top: 0;
 }
 .message-body a {
   color: #00a8fc;
@@ -475,44 +473,12 @@ a {
   background: #484a51;
   flex: 1;
 }
-.project-embed {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  padding: 16px;
-  margin-top: 12px;
-  background: #2b2d31;
-  border-left: 4px solid #5865f2;
-  border-radius: 4px;
-  font-size: 20px;
-}
-.project-embed strong {
-  color: #00a8fc;
-  font-size: 24px;
-}
-.dm-links {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 24px;
-  font-size: 22px;
-}
-.dm-links > span {
-  color: #f2f3f5;
-  font-size: 20px;
-  font-weight: 600;
-}
-.dm-links > a + span {
-  margin-top: 18px;
-}
-.message-body .source-pill {
-  display: inline-block;
-  margin-top: 22px;
-  padding: 3px 7px;
+.message-body .channel-mention {
+  padding: 1px 3px;
   background: #5865f22e;
   border-radius: 4px;
   color: #c9cdfb;
-  font-size: 19px;
+  white-space: nowrap;
 }
 .discord-composer {
   display: flex;

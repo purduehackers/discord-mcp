@@ -2,7 +2,7 @@
 
 Edit the 30s, 1920 × 1080 video and README banner with Remotion. The walkthrough recreates a search for MacID in Purdue Hackers’ #ship channel, followed by a simulated direct message through Wack Hacker.
 
-The source posts are [akshith’s project announcement](https://discord.com/channels/772576325897945119/904896819165814794/1559035157670010890) and [install update](https://discord.com/channels/772576325897945119/904896819165814794/1563589124143710410). They also appear on the public [Purdue Hackers ship feed](https://ships.purduehackers.com/). The agent conversation, layout, link preview, and outgoing message are recreations. Rendering never connects to Discord or sends messages.
+The source posts are [akshith’s project announcement](https://discord.com/channels/772576325897945119/904896819165814794/1559035157670010890) and [install update](https://discord.com/channels/772576325897945119/904896819165814794/1563589124143710410). They also appear on the public [Purdue Hackers ship feed](https://ships.purduehackers.com/). The agent conversation, layout, and outgoing message are recreations. Rendering never connects to Discord or sends messages.
 
 Start the editor from the repository root:
 

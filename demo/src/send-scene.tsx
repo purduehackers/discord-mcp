@@ -35,19 +35,18 @@ export function SendScene() {
               time="Today at 12:25 PM"
               bot
             >
-              <strong>
-                {MACID.name} by {MACID.author}
-              </strong>
-              <p>Camera-based face unlock for macOS.</p>
-              <div className="dm-links">
-                <span>Project</span>
+              <p>
+                Here’s {MACID.author}’s {MACID.name} app:{" "}
                 <a href={MACID.website}>macid.akshith.io</a>
-                <span>Source code</span>
-                <a href={MACID.repository}>github.com/akshithio/macid</a>
-              </div>
-              <a className="source-pill" href={MACID.originalPost}>
-                # 🚢ship · Original post
-              </a>
+              </p>
+              <p>
+                The code’s at <a href={MACID.repository}>github.com/akshithio/macid</a>. He shared
+                it in{" "}
+                <a className="channel-mention" href={MACID.originalPost}>
+                  #🚢ship
+                </a>
+                .
+              </p>
             </Message>
           </Reveal>
         </DiscordWindow>

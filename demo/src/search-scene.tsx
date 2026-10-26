@@ -78,10 +78,6 @@ export function SearchScene() {
                 <a className="message-link" href={MACID.website}>
                   macid.akshith.io
                 </a>
-                <div className="project-embed">
-                  <strong>{MACID.name}</strong>
-                  <span>Camera-based face unlock</span>
-                </div>
               </Message>
             </Reveal>
           </DiscordWindow>
