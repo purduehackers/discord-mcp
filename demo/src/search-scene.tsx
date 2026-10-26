@@ -90,10 +90,6 @@ export function SearchScene() {
               </Message>
             </Reveal>
           </div>
-          <Reveal delay={155} className="result-caption">
-            <span className="result-dot" />
-            Found the release and the original post
-          </Reveal>
         </Reveal>
       </div>
     </SceneShell>

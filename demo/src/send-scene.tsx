@@ -61,10 +61,6 @@ export function SendScene() {
               </Message>
             </Reveal>
           </div>
-          <Reveal delay={85} className="result-caption">
-            <span className="result-dot" />
-            Delivered through your bot
-          </Reveal>
         </div>
       </div>
     </SceneShell>

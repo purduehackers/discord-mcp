@@ -270,8 +270,7 @@ h1 span {
     7px 7px 0 #080909,
     8px 8px 0 #4c4f40;
 }
-.status-dot,
-.result-dot {
+.status-dot {
   width: 10px;
   height: 10px;
   background: #ffe53b;
@@ -450,16 +449,6 @@ a {
   padding: 2px 4px;
   background: #ffe53b;
   color: #11130a;
-}
-.result-caption {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  position: absolute;
-  bottom: 27px;
-  left: 31px;
-  font-size: 23px;
-  color: #a6b297;
 }
 .message-link {
   display: block;
