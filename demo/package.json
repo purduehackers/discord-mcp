@@ -1,0 +1,38 @@
+{
+  "name": "@purduehackers/discord-mcp-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remotion launch video and README banner for Discord MCP.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/purduehackers/discord-mcp.git",
+    "directory": "demo"
+  },
+  "scripts": {
+    "dev": "remotionb studio",
+    "build": "remotionb bundle",
+    "upgrade": "remotionb upgrade",
+    "lint": "eslint src && tsc",
+    "render": "remotionb render DiscordMCP out/discord-mcp.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --port=3100",
+    "banner": "remotionb still Banner ../.github/assets/banner.png --port=3100"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.538",
+    "@remotion/fonts": "4.0.538",
+    "@remotion/media": "4.0.538",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.538"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.538",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "10.12.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  }
+}

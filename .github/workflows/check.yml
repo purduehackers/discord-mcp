@@ -9,6 +9,8 @@ jobs:
         with:
           bun-version: 1.4.0
       - run: bun install --frozen-lockfile
+      - run: bun install --cwd demo --frozen-lockfile
+      - run: bun run --cwd demo lint
       - run: bun run typecheck
       - run: bun run lint
       - run: bun run format --check

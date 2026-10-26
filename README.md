@@ -1,38 +1,61 @@
-# Discord MCP
+![Discord MCP — Discord for your agent](.github/assets/banner.png)
 
-A public hosted [MCP](https://modelcontextprotocol.io) server for Discord, maintained by [Purdue Hackers](https://purduehackers.com).
-Connect your agent with your own Discord bot token. No server installation required.
+<p align="center">
+  <a href="https://github.com/purduehackers/discord-mcp/actions/workflows/check.yml"><img src="https://github.com/purduehackers/discord-mcp/actions/workflows/check.yml/badge.svg" alt="Build checks" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-ffe53b" alt="MIT license" /></a>
+  <a href="#what-can-it-do"><img src="https://img.shields.io/badge/typed_tools-78-ffe53b" alt="78 typed tools" /></a>
+</p>
+
+**Read, search, and manage Discord from your AI agent.**
+
+Discord MCP connects Codex, Claude Code, Cursor, Pi, and other MCP clients to Discord.
+Bring your own bot token and use it with any server your bot can access.
+Use the public endpoint or [run it yourself](#self-host).
+
+[Install](#install) · [Client setup](#client-setup) · [Tools](#what-can-it-do) · [Contribute](#contributing)
+
+## Install
+
+**Paste this into your agent:**
 
 ```text
-https://discord.purduehackers.com/mcp
+Install Discord MCP for this agent using the instructions at
+https://github.com/purduehackers/discord-mcp.
+
+Use the hosted Streamable HTTP server at
+https://discord.purduehackers.com/mcp with X-Discord-Token
+set from my DISCORD_BOT_TOKEN environment variable.
+
+Configure this client's user-level MCP settings and preserve existing servers.
+If the token is missing, help me create a Discord bot and set it locally;
+do not ask me to paste the token into chat or commit it to a repository.
+
+Reconnect, call diagnose_connection, and show which bot and servers I can use.
+Do not send messages or change Discord during setup.
 ```
 
-78 typed tools cover messages, channels, threads, members, roles, guilds, invites, emoji, stickers, events, moderation, webhooks, and audit logs.
-Built with [xmcp](https://xmcp.dev) and [`@discordjs/rest`](https://discord.js.org/docs/packages/rest/stable).
+### Get a bot token
 
-Tools include readable titles, Codex status labels, and Claude search hints. Results include a short summary alongside JSON and structured data.
-
-## Get a token
-
-1. Create an application in the [Discord Developer Portal](https://discord.com/developers/applications) and copy its **Bot** token.
-2. Install the bot in your server with the permissions your agent needs. See [Discord's setup guide](https://docs.discord.com/developers/quick-start/getting-started).
-3. Set the token in the environment where you launch your client:
+1. [Create a Discord application](https://discord.com/developers/applications). Open **Bot** and copy its token.
+2. Install the bot in your server with the permissions you need. Enable **Message Content Intent** for message search and reading content.
+3. Set the token where you launch your agent:
 
 ```sh
 export DISCORD_BOT_TOKEN='YOUR_DISCORD_BOT_TOKEN'
 ```
 
-The hosted service receives your token and uses it for Discord requests. Credentials are scoped to each request and are not persisted by the application.
-Discord enforces your bot's permissions; connecting does not grant access to Purdue Hackers' servers.
-Keep tokens out of shared configuration and source control.
+Need a walkthrough? Follow [Discord's bot setup guide](https://docs.discord.com/developers/quick-start/getting-started).
 
-## Connect your client
+## Client setup
 
-Use **Streamable HTTP** with the `X-Discord-Token` header. Supply the raw token, without a `Bot ` prefix.
-These examples assume the client is already installed. Merge configuration snippets into existing files instead of replacing other servers.
-Desktop apps must also receive `DISCORD_BOT_TOKEN`; a terminal export alone does not update an already-running app.
+Already have a token? Pick your client below. Use **Streamable HTTP**, the endpoint below, and the **X-Discord-Token** header.
+Supply the raw token without a `Bot ` prefix.
 
-<details open>
+```text
+https://discord.purduehackers.com/mcp
+```
+
+<details>
 <summary><strong>Codex — CLI, desktop, and IDE</strong></summary>
 
 Register the endpoint:
@@ -178,52 +201,90 @@ Run `opencode mcp list` to inspect the connection. [OpenCode MCP documentation](
 
 </details>
 
-Other clients can use the same endpoint and header if they support Streamable HTTP with custom headers.
-This service does not provide an MCP OAuth login flow.
-For a Discord OAuth access token, also send `X-Discord-Auth-Prefix: Bearer`; available operations depend on its scopes.
+Other clients work too if they support Streamable HTTP with custom headers.
+Desktop apps must receive `DISCORD_BOT_TOKEN` in their own environment; exporting it in a terminal does not update an app that is already running.
 
 ## Try it
 
-Ask your agent:
+Once connected, ask your agent:
 
-> Use Discord to show which bot I connected and list the servers it can access.
+> Check my Discord connection and show the servers I can access.
 
-This calls `diagnose_connection` without changing anything. Add a server ID and channel ID to check roles and channel permissions.
-Tools accept Discord IDs as strings. Use `list_channels`, `list_members`, and `list_roles` to find IDs.
-List tools return one page; message mentions are disabled unless explicitly supplied.
+> Find the discussion about our launch date and link the original messages.
 
-| Tool                  | Use                                                                                       |
-| --------------------- | ----------------------------------------------------------------------------------------- |
-| `diagnose_connection` | Check identity, accessible servers, roles, and channel permissions.                       |
-| `search_messages`     | Search Discord's server index by text, channels, authors, date IDs, and attachment types. |
-| `send_direct_message` | Send a text DM to one user.                                                               |
-| `forward_message`     | Forward a message with Discord's native snapshot and attribution.                         |
-| `send_long_message`   | Split text into up to 20 messages while preserving code fences and Unicode.               |
+> Summarize the latest updates in #projects.
 
-Search requires Read Message History and the application's [Message Content intent](https://docs.discord.com/developers/resources/message#search-guild-messages).
-An indexing error includes `retry_after` in seconds. Search totals are approximate; a short page does not prove completion.
-Long sends stop on failure and report confirmed message IDs and `next_chunk_index`. Check uncertain delivery before resuming with identical content and `start_chunk_index`.
+> Post this release note to #announcements.
 
-| Problem                       | Check                                                                                                                |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Missing `X-Discord-Token`     | The client must send the header on every request. Check its environment and header syntax.                           |
-| Discord returns `401`         | Use a valid bot token, without a `Bot ` prefix in the header.                                                        |
-| Missing access or permissions | Install the bot in the target server and check channel permissions and role hierarchy.                               |
-| Message content is empty      | Check the bot's [Message Content intent](https://docs.discord.com/developers/events/gateway#message-content-intent). |
+The agent discovers server, channel, and member IDs through the tools. You choose the server; there is no shared or default server.
 
-The MCP endpoint is `/mcp`. The [domain root](https://discord.purduehackers.com) redirects to the Purdue Hackers Discord invite.
+## What can it do?
 
-## Run your own
+|                     | Capabilities                                                                                                                   |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Find context**    | Indexed message search, channel history, individual messages, and audit logs.                                                  |
+| **Communicate**     | Messages, replies, DMs, native forwards, files, embeds, reactions, and pins. Long messages preserve code fences across chunks. |
+| **Manage a server** | Channels, threads, members, roles, invites, events, emoji, stickers, and webhooks.                                             |
+| **Moderate**        | Timeouts, kicks, bans, message cleanup, and auto-moderation rules.                                                             |
+| **Troubleshoot**    | Connection diagnostics, channel permissions, role hierarchy guidance, and actionable Discord errors.                           |
+
+All **78 tools** have typed inputs and outputs. Codex gets readable activity labels; Claude gets tool search hints.
+Browse the [tool implementations](src/tools) for the full set.
+
+<details>
+<summary><strong>Permissions, limits, and credentials</strong></summary>
+
+- Discord enforces your bot's permissions. Connecting does not grant access to anyone else's servers.
+- Search uses [Discord's index](https://docs.discord.com/developers/resources/message#search-guild-messages), requires Read Message History and Message Content Intent, and returns one page per call. Totals can change; a short page does not prove completion. Indexing errors include `retry_after` in seconds.
+- Mentions are disabled unless explicitly selected. Long sends stop on failure and report confirmed message IDs. Check uncertain delivery before resuming with the original content and `start_chunk_index`.
+- The hosted service receives your token over HTTPS and uses it for Discord requests. The application does not persist credentials.
+- For a Discord OAuth access token, add `X-Discord-Auth-Prefix: Bearer`. Available tools depend on its scopes. This service does not provide an MCP OAuth login flow.
+
+</details>
+
+<details>
+<summary><strong>Connection not working?</strong></summary>
+
+Run `diagnose_connection` first. Include `guild_id` and `channel_id` to inspect a specific scope.
+
+| Problem                       | Fix                                                                                                                           |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Missing token                 | Send `X-Discord-Token` on every request. Check the client's environment and header configuration.                             |
+| Discord returns 401           | Use a valid raw bot token and the correct Bot or Bearer auth prefix.                                                          |
+| Missing access or permissions | Check bot membership, channel overwrites, and role hierarchy.                                                                 |
+| Empty message content         | Enable the application's [Message Content Intent](https://docs.discord.com/developers/events/gateway#message-content-intent). |
+| Tools missing after an update | Restart the MCP connection so the client refreshes its tool list.                                                             |
+
+</details>
+
+## Self-host
+
+Requires [Bun](https://bun.sh). Built with [xmcp](https://xmcp.dev) and [@discordjs/rest](https://discord.js.org/docs/packages/rest/stable).
 
 ```sh
 git clone https://github.com/purduehackers/discord-mcp.git
 cd discord-mcp
 bun install
-bun run dev
+bun run build
+bun run start-http
 ```
 
-For production, run `bun run build`, then `bun run start-http` or `bun run start-stdio`.
-HTTP uses the same per-request headers. Stdio reads `DISCORD_TOKEN` or `DISCORD_BOT_TOKEN`, with optional `DISCORD_AUTH_PREFIX`.
-Vercel uses xmcp's native deployment output. Each file in `src/tools/` defines one tool.
+HTTP accepts the same per-request headers. For stdio, set `DISCORD_BOT_TOKEN` and run `bun run start-stdio`.
+Use `bun run dev` for development. Vercel deploys xmcp's native output.
 
-Checks: `bun run typecheck`, `bun run lint`, `bun run format --check`, `bun run build`.
+## Contributing
+
+[Issues](https://github.com/purduehackers/discord-mcp/issues) and pull requests are welcome.
+Each file in `src/tools/` defines one tool; shared schemas live in `src/lib/schemas/`.
+The [Remotion demo](demo) has its own dependencies. Install them before running the full checks:
+
+```sh
+bun install --cwd demo
+bun run --cwd demo lint
+bun run typecheck
+bun run lint
+bun run format --check
+bun run build
+```
+
+[MIT licensed](LICENSE). Made by [Purdue Hackers](https://purduehackers.com).
