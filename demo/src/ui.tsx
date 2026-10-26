@@ -22,15 +22,6 @@ export function DiscordMark() {
   );
 }
 
-/** Keeps completion states legible at social video sizes. */
-export function CheckMark() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <path d="m5 12 4 4L19 6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 /** Uses frame time so previews and exports have identical motion. */
 export function Reveal({ children, delay = 0, className, style }: RevealProps) {
   const frame = useCurrentFrame();
@@ -55,20 +46,15 @@ export function Reveal({ children, delay = 0, className, style }: RevealProps) {
   );
 }
 
-/** Matches the active voice labels exposed by the hosted tools. */
+/** Renders completed tool calls as terminal transcript lines. */
 export function ToolRow({ children, delay = 0, detail }: ToolRowProps) {
   return (
     <Reveal delay={delay} className="tool-row">
-      <span className="tool-logo">
-        <DiscordMark />
-      </span>
-      <span>
+      <span className="terminal-bullet">•</span>
+      <div>
         {children}
-        {detail ? <small>{detail}</small> : undefined}
-      </span>
-      <span className="tool-check">
-        <CheckMark />
-      </span>
+        {detail ? <div className="tool-detail">└ {detail}</div> : undefined}
+      </div>
     </Reveal>
   );
 }

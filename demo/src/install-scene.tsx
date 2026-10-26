@@ -1,8 +1,9 @@
 import { interpolate, useCurrentFrame } from "remotion";
 
-import { CheckMark, DiscordMark, Reveal, SceneShell } from "./ui";
+import { CodexHeader, TerminalPrompt, TerminalWindow } from "./terminal";
+import { Reveal, SceneShell, ToolRow } from "./ui";
 
-/** Shows setup without displaying credentials or implying an OAuth login. */
+/** Shows credential setup as terminal output without exposing the token. */
 export function InstallScene() {
   const frame = useCurrentFrame();
   const prompt = "Install github.com/purduehackers/discord-mcp";
@@ -15,36 +16,28 @@ export function InstallScene() {
   return (
     <SceneShell step="01 / CONNECT" title="Connect Discord to your agent">
       <Reveal delay={5} className="install-window">
-        <div className="window-bar">
-          <span className="agent-symbol">&gt;_</span>Codex
-          <span className="window-label">MCP SETUP</span>
-        </div>
-        <div className="install-content">
-          <div className="prompt-box">
+        <TerminalWindow>
+          <CodexHeader />
+          <div className="user-prompt">
             <span className="prompt-caret">›</span>
             <span>
               {prompt.slice(0, typed)}
               <span className="typing-cursor" style={{ opacity: Number(frame < 66) }} />
             </span>
           </div>
-          <Reveal delay={70} className="credential-row">
-            <span>Use your own Discord bot</span>
-            <code>DISCORD_BOT_TOKEN</code>
-            <span className="masked-token">••••••••••••</span>
+          <div className="tool-stack">
+            <ToolRow delay={70} detail="Read bot token from local environment">
+              Configured Discord MCP
+            </ToolRow>
+            <ToolRow delay={94} detail="Wack Hacker · Purdue Hackers · 78 tools">
+              Checked connection
+            </ToolRow>
+          </div>
+          <Reveal delay={110} className="agent-answer">
+            Discord is connected.
           </Reveal>
-          <Reveal delay={94} className="connected-card">
-            <div className="connected-logo">
-              <DiscordMark />
-            </div>
-            <div>
-              <strong>Discord connected</strong>
-              <p>78 tools available to your agent</p>
-            </div>
-            <div className="connected-check">
-              <CheckMark />
-            </div>
-          </Reveal>
-        </div>
+          <TerminalPrompt />
+        </TerminalWindow>
       </Reveal>
       <Reveal delay={115} className="client-line">
         Codex <i /> Claude Code <i /> Cursor <i /> Pi <i /> and more

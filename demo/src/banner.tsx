@@ -1,5 +1,6 @@
 import { DitherField } from "./dither-field";
-import { DiscordMark, CheckMark, GliderMark } from "./ui";
+import { CodexHeader, TerminalWindow } from "./terminal";
+import { GliderMark, ToolRow } from "./ui";
 
 /** Uses the same visual system as the launch video for the repository hero. */
 export function Banner() {
@@ -20,28 +21,18 @@ export function Banner() {
         <div className="banner-credit">Open source · MIT license</div>
       </div>
       <div className="banner-preview">
-        <div className="banner-window-title">
-          <span className="agent-symbol">&gt;_</span>Codex
-          <span className="status-dot" />
-        </div>
-        <div className="banner-prompt">Find the Mac face unlock app in #ship.</div>
-        <div className="banner-tools">
-          <div>
-            <DiscordMark />
-            Searched server messages
-            <CheckMark />
+        <TerminalWindow>
+          <CodexHeader />
+          <div className="user-prompt">
+            <span className="prompt-caret">›</span>
+            <span>Find the Mac face unlock app in #ship.</span>
           </div>
-          <div>
-            <DiscordMark />
-            Read channel messages
-            <CheckMark />
+          <div className="tool-stack">
+            <ToolRow delay={-24}>Searched server messages</ToolRow>
+            <ToolRow delay={-24}>Read channel messages</ToolRow>
+            <ToolRow delay={-24}>Sent direct message</ToolRow>
           </div>
-          <div>
-            <DiscordMark />
-            Sent direct message
-            <CheckMark />
-          </div>
-        </div>
+        </TerminalWindow>
         <div className="banner-clients">Codex · Claude Code · Cursor · Pi</div>
       </div>
     </div>

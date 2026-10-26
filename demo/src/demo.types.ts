@@ -32,3 +32,13 @@ export interface MessageProps {
 export interface DitherFieldProps {
   frame?: number;
 }
+
+export interface TerminalWindowProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export interface DiscordWindowProps {
+  children: ReactNode;
+  direct?: boolean;
+}

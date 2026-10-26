@@ -9,6 +9,7 @@ import "./style.css";
 await Promise.all([
   loadFont({ family: "PixelHackers", url: staticFile("PixelHackers.woff2") }),
   loadFont({ family: "Inconsolata", url: staticFile("Inconsolata.ttf"), weight: "200 900" }),
+  loadFont({ family: "Inter", url: staticFile("Inter.ttf"), weight: "100 900" }),
 ]);
 
 /** Registers the shareable video and its matching repository banner. */

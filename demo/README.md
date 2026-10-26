@@ -21,4 +21,4 @@ bun run banner
 
 The video exports to `out/discord-mcp.mp4`. The banner exports to `../.github/assets/banner.png`.
 
-The design uses Purdue Hackers’ glider, a dithered Discord logo, PixelHackers by Jadden Picardal, and original interface sounds. The Discord avatars depict the original post’s author and the connected bot. [PixelHackers](public/PixelHackers-LICENSE.txt) and [Inconsolata](public/Inconsolata-LICENSE.txt) retain their SIL Open Font Licenses.
+The design uses Purdue Hackers’ glider, a dithered Discord logo, PixelHackers by Jadden Picardal, and original interface sounds. The Discord avatars depict the original post’s author and the connected bot. [PixelHackers](public/PixelHackers-LICENSE.txt), [Inconsolata](public/Inconsolata-LICENSE.txt), and [Inter](public/Inter-LICENSE.txt) retain their SIL Open Font Licenses.

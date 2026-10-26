@@ -1,7 +1,9 @@
 import { interpolate, useCurrentFrame } from "remotion";
 
+import { DiscordWindow } from "./discord-window";
 import { MACID } from "./scenario.constants";
-import { DiscordMark, Message, Reveal, SceneShell, ToolRow } from "./ui";
+import { CodexHeader, TerminalPrompt, TerminalWindow } from "./terminal";
+import { Message, Reveal, SceneShell, ToolRow } from "./ui";
 
 /** Recreates a lookup using public posts from Purdue Hackers' ship channel. */
 export function SearchScene() {
@@ -16,18 +18,18 @@ export function SearchScene() {
   return (
     <SceneShell step="02 / FIND A PROJECT" title="Find a project someone shipped">
       <div className="workflow-grid">
-        <Reveal className="panel agent-panel">
-          <div className="window-bar">
-            <span className="agent-symbol">&gt;_</span>Codex
-            <span className="status-dot" />
-          </div>
-          <div className="agent-body">
+        <Reveal>
+          <TerminalWindow>
+            <CodexHeader />
             <div className="user-prompt">
-              {prompt.slice(0, typed)}
-              <span className="typing-cursor" style={{ opacity: Number(frame < 52) }} />
+              <span className="prompt-caret">›</span>
+              <span>
+                {prompt.slice(0, typed)}
+                <span className="typing-cursor" style={{ opacity: Number(frame < 52) }} />
+              </span>
             </div>
             <div className="tool-stack">
-              <ToolRow delay={60} detail="#ship">
+              <ToolRow delay={60} detail="2 matches in #ship">
                 Searched server messages
               </ToolRow>
               <ToolRow delay={95}>Read channel messages</ToolRow>
@@ -38,24 +40,17 @@ export function SearchScene() {
               </strong>
               <p>It adds camera-based face unlock to macOS. You can install it now.</p>
               <a className="answer-link" href={MACID.website}>
-                macid.akshith.io ↗
+                macid.akshith.io
               </a>
-              <a className="source-pill" href={MACID.releasePost}>
-                <span>#</span> 🚢ship <span>Oct 24 ↗</span>
+              <a className="terminal-source" href={MACID.releasePost}>
+                Source: #ship · Oct 24
               </a>
             </Reveal>
-          </div>
+            <TerminalPrompt />
+          </TerminalWindow>
         </Reveal>
-        <Reveal delay={50} className="panel discord-panel">
-          <div className="window-bar discord-bar">
-            <DiscordMark />
-            <span>Purdue Hackers</span>
-            <span className="window-label">SERVER</span>
-          </div>
-          <div className="channel-title">
-            <span>#</span>🚢ship<span className="channel-description">Share what you build</span>
-          </div>
-          <div className="messages search-messages">
+        <Reveal delay={50}>
+          <DiscordWindow>
             <Message
               name={MACID.author}
               initials="a"
@@ -89,7 +84,7 @@ export function SearchScene() {
                 </div>
               </Message>
             </Reveal>
-          </div>
+          </DiscordWindow>
         </Reveal>
       </div>
     </SceneShell>
