@@ -1,7 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "bunVersion": "1.4.x",
-  "outputDirectory": "public",
-  "rewrites": [{ "source": "/mcp", "destination": "/api/mcp" }],
   "redirects": [{ "source": "/", "destination": "https://phack.rs/discord", "permanent": false }]
 }

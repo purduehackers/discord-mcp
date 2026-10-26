@@ -1,33 +1,46 @@
 {
   "name": "@purduehackers/discord-mcp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
+  "description": "Typed Discord tools built with xmcp.",
   "bin": {
-    "discord-mcp": "src/index.ts"
+    "discord-mcp": "./dist/stdio.js"
   },
-  "type": "module",
-  "exports": "./src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/stdio.js",
   "scripts": {
-    "start": "bun src/index.ts",
-    "typecheck": "tsc --noEmit",
+    "build": "xmcp build",
+    "dev": "xmcp dev",
+    "start-http": "bun dist/http.js",
+    "start-stdio": "bun dist/stdio.js",
     "format": "oxfmt",
-    "lint": "oxlint --deny-warnings"
+    "lint": "oxlint --deny-warnings",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@discordjs/rest": "2.6.3",
     "@modelcontextprotocol/server": "2.4.0",
     "better-result": "^3",
     "discord-api-types": "0.38.57",
-    "zod": "4.6.7"
+    "xmcp": "1.9.0",
+    "zod": "^4.0.0"
   },
   "devDependencies": {
     "@rayhanadev/ox": "0.4.0",
     "@types/bun": "^1.4.4",
+    "@types/express": "5",
+    "@types/node": ">=22.0.0",
+    "@xmcp-dev/compiler": "1.9.0",
     "oxclippy": "^0.2.0",
     "oxfmt": "^0.74.0",
     "oxlint": "^1.89.0",
     "oxlint-tsgolint": "^7.0.2005",
     "typescript": "^7"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   },
   "packageManager": "bun@1.4.0"
 }
