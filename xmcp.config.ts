@@ -9,7 +9,7 @@ const xmcpConfig: XmcpConfig = {
     resources: false,
   },
   template: {
-    icons: [{ src: "./xmcp.svg" }],
+    icons: [{ src: "./discord.svg", mimeType: "image/svg+xml", sizes: ["any"] }],
     name: "purduehackers-discord",
     description: "Discord tools using your own bot credentials.",
     instructions:
