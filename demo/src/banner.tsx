@@ -16,8 +16,8 @@ export function Banner() {
           <br />
           <span>your agent</span>
         </h1>
-        <p>Use 78 tools with your Discord bot.</p>
-        <div className="banner-credit">OPEN SOURCE / MIT LICENSE</div>
+        <p>Search conversations and send messages.</p>
+        <div className="banner-credit">Open source · MIT license</div>
       </div>
       <div className="banner-preview">
         <div className="banner-window-title">

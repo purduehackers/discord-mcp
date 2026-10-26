@@ -27,9 +27,9 @@ export function IntroScene() {
         <span>for agents</span>
       </h1>
       <Reveal delay={14} className="intro-caption">
-        Use 78 Discord tools with your bot.
+        Search conversations and send messages.
       </Reveal>
-      <div className="intro-credit">DISCORD MCP / OPEN SOURCE / BUILT AT PURDUE HACKERS</div>
+      <div className="intro-credit">Open source by Purdue Hackers</div>
     </div>
   );
 }
