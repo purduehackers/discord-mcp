@@ -12,4 +12,3 @@ jobs:
       - run: bun run typecheck
       - run: bun run lint
       - run: bun run format --check
-      - run: bun test

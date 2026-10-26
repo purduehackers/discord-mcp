@@ -3,9 +3,9 @@ import { REST } from "@discordjs/rest";
 import { serveStdio } from "@modelcontextprotocol/server/stdio";
 import { Result } from "better-result";
 
-import { createServer } from "./create-server";
-import { DiscordError } from "./discord-error";
+import { DiscordError } from "./errors";
 import { credentialSchema } from "./schemas";
+import { createServer } from "./server";
 
 const credentials = credentialSchema.safeParse({
   token: process.env.DISCORD_TOKEN || process.env.DISCORD_BOT_TOKEN,

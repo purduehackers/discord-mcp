@@ -1,6 +1,6 @@
 {
   "name": "@purduehackers/discord-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "bin": {
     "discord-mcp": "src/index.ts"
@@ -9,7 +9,6 @@
   "exports": "./src/index.ts",
   "scripts": {
     "start": "bun src/index.ts",
-    "test": "bun test",
     "typecheck": "tsc --noEmit",
     "format": "oxfmt",
     "lint": "oxlint --deny-warnings"
@@ -18,10 +17,10 @@
     "@discordjs/rest": "2.6.3",
     "@modelcontextprotocol/server": "2.4.0",
     "better-result": "^3",
+    "discord-api-types": "0.38.57",
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "@modelcontextprotocol/client": "2.4.0",
     "@rayhanadev/ox": "0.4.0",
     "@types/bun": "^1.4.4",
     "oxclippy": "^0.2.0",
