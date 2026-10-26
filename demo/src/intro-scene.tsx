@@ -22,12 +22,12 @@ export function IntroScene() {
         <span>PURDUE HACKERS PRESENTS</span>
       </Reveal>
       <h1>
-        DISCORD
+        Discord
         <br />
-        <span>FOR AGENTS.</span>
+        <span>for agents</span>
       </h1>
       <Reveal delay={14} className="intro-caption">
-        Your bot. Any server. 78 tools.
+        Use 78 Discord tools with your bot.
       </Reveal>
       <div className="intro-credit">DISCORD MCP / OPEN SOURCE / BUILT AT PURDUE HACKERS</div>
     </div>

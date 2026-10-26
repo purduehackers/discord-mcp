@@ -13,10 +13,10 @@ export function InstallScene() {
     }),
   );
   return (
-    <SceneShell step="01 / CONNECT" title="Just ask your agent to install it.">
+    <SceneShell step="01 / CONNECT" title="Connect Discord to your agent">
       <Reveal delay={5} className="install-window">
         <div className="window-bar">
-          <span className="agent-symbol">&gt;_</span>Your agent
+          <span className="agent-symbol">&gt;_</span>Codex
           <span className="window-label">MCP SETUP</span>
         </div>
         <div className="install-content">

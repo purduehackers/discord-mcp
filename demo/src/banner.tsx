@@ -14,17 +14,17 @@ export function Banner() {
         <h1>
           Discord for
           <br />
-          <span>your agent.</span>
+          <span>your agent</span>
         </h1>
-        <p>Your bot. Any server. 78 tools.</p>
-        <div className="banner-credit">OPEN SOURCE. BUILT TO CONNECT.</div>
+        <p>Use 78 tools with your Discord bot.</p>
+        <div className="banner-credit">OPEN SOURCE / MIT LICENSE</div>
       </div>
       <div className="banner-preview">
         <div className="banner-window-title">
-          <span className="agent-symbol">&gt;_</span>Your agent
+          <span className="agent-symbol">&gt;_</span>Codex
           <span className="status-dot" />
         </div>
-        <div className="banner-prompt">Find the plan. Share a recap.</div>
+        <div className="banner-prompt">Find the Mac face unlock app in #ship.</div>
         <div className="banner-tools">
           <div>
             <DiscordMark />
@@ -38,7 +38,7 @@ export function Banner() {
           </div>
           <div>
             <DiscordMark />
-            Sent message
+            Sent direct message
             <CheckMark />
           </div>
         </div>

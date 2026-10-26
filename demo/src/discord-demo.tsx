@@ -22,7 +22,7 @@ export function DiscordDemo() {
       <Sequence name="Find the conversation" from={270} durationInFrames={300}>
         <SearchScene />
       </Sequence>
-      <Sequence name="Post a recap" from={570} durationInFrames={165}>
+      <Sequence name="Send the project links" from={570} durationInFrames={165}>
         <SendScene />
       </Sequence>
       <Sequence name="Get Discord MCP" from={735} durationInFrames={165}>

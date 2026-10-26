@@ -50,3 +50,7 @@ If the ASD-STE100 skill is available, use it when you write or revise substantia
 - Replace diagnostic placeholders with project-specific names and types.
 - Run Oxfmt and Oxlint after each correction.
 <!-- oxray:comments:end -->
+
+## Public copy
+
+Follow the [Vercel writing guidelines](https://github.com/vercel-labs/writing-guidelines) for README and demo copy. Use active voice, sentence-case headings, descriptive links, and concrete instructions. Define acronyms on first use. Keep code examples copyable and credentials out of examples.

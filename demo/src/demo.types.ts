@@ -23,6 +23,7 @@ export interface MessageProps {
   name: string;
   initials: string;
   color: string;
+  avatar?: string;
   children: ReactNode;
   time?: string;
   bot?: boolean;

@@ -15,13 +15,13 @@ export function OutroScene() {
       </Reveal>
       <Reveal delay={4}>
         <h1>
-          YOUR AGENT.
+          Connect your
           <br />
-          <span>YOUR DISCORD.</span>
+          <span>Discord bot</span>
         </h1>
       </Reveal>
       <Reveal delay={14} className="outro-caption">
-        Open source. Public endpoint. Bring your bot.
+        Use the hosted server with your own bot token.
       </Reveal>
       <Reveal delay={24} className="repo-cta">
         <span>↗</span> github.com/purduehackers/discord-mcp

@@ -333,11 +333,14 @@ h1 span {
   margin: 15px 0;
   color: #c9cebf;
 }
-.list-number {
+a {
   color: #ffe53b;
-  display: inline-block;
-  width: 35px;
-  font-size: 29px;
+  text-decoration: none;
+}
+.answer-link {
+  display: block;
+  font-size: 30px;
+  margin: 18px 0 8px;
 }
 .source-pill {
   display: inline-flex;
@@ -413,6 +416,11 @@ h1 span {
   width: 28px;
   color: #fff;
 }
+.avatar img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+}
 .message-main {
   flex: 1;
 }
@@ -458,11 +466,55 @@ h1 span {
   font-size: 23px;
   color: #a6b297;
 }
-.discord-list {
-  line-height: 1.6;
+.message-link {
+  display: block;
+  font-size: 25px;
+  margin-top: 8px;
 }
-.channel-link {
-  color: #ffe53b;
+.search-messages .message {
+  margin-bottom: 18px;
+}
+.search-messages .message-body {
+  font-size: 27px;
+}
+.date-divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 17px;
+  color: #98a18e;
+  margin: 12px 0;
+}
+.date-divider::before,
+.date-divider::after {
+  content: "";
+  height: 1px;
+  background: #3f493a;
+  flex: 1;
+}
+.project-embed {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #1a2018;
+  border-left: 3px solid #ffe53b;
+  padding: 12px 18px;
+  margin-top: 14px;
+  font-size: 23px;
+}
+.dm-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 28px;
+  font-size: 26px;
+}
+.dm-links > span {
+  color: #a8b09e;
+  font-size: 20px;
+}
+.dm-links > a + span {
+  margin-top: 18px;
 }
 .outro {
   padding-top: 45px;

@@ -1,29 +1,28 @@
+import { MACID } from "./scenario.constants";
 import { DiscordMark, Message, Reveal, SceneShell, ToolRow } from "./ui";
 
-/** Makes the user's explicit send request visible before the write action. */
+/** Simulates an authorized DM without connecting the video to Discord. */
 export function SendScene() {
   return (
-    <SceneShell step="03 / TAKE ACTION" title="Then keep everyone in the loop.">
+    <SceneShell step="03 / SEND A DM" title="Send the project links to yourself">
       <div className="workflow-grid">
         <div className="panel agent-panel">
           <div className="window-bar">
-            <span className="agent-symbol">&gt;_</span>Your agent
+            <span className="agent-symbol">&gt;_</span>Codex
             <span className="status-dot" />
           </div>
           <div className="agent-body">
             <Reveal delay={5} className="user-prompt">
-              Post a quick recap in #updates.
+              DM me the project and source code.
             </Reveal>
             <div className="tool-stack">
-              <ToolRow delay={40} detail="#updates">
-                Sent message
-              </ToolRow>
+              <ToolRow delay={40}>Sent direct message</ToolRow>
             </div>
             <Reveal delay={70} className="agent-answer">
-              <strong>Posted to #updates.</strong>
-              <p>Everyone has the next steps.</p>
+              <strong>Sent you both links.</strong>
+              <p>I included akshith’s original post.</p>
               <div className="source-pill">
-                <span>#</span> updates <span>↗</span>
+                <span>@</span> Wack Hacker <span>↗</span>
               </div>
             </Reveal>
           </div>
@@ -31,27 +30,40 @@ export function SendScene() {
         <div className="panel discord-panel">
           <div className="window-bar discord-bar">
             <DiscordMark />
-            <span>Demo workspace</span>
+            <span>Direct messages</span>
           </div>
           <div className="channel-title">
-            <span>#</span>updates<span className="channel-description">Keep the team in sync</span>
+            <span>@</span>Wack Hacker<span className="channel-description">Your Discord bot</span>
           </div>
           <div className="messages">
             <Reveal delay={48}>
-              <Message name="Your bot" initials="" color="#5865f2" time="Just now" bot>
-                <strong>Launch recap</strong>
-                <p>The API is ready. Two things left:</p>
-                <div className="discord-list">
-                  • Publish the install guide
-                  <br />• Finish the demo video
+              <Message
+                name="Wack Hacker"
+                initials=""
+                color="#5865f2"
+                avatar="wack-hacker.png"
+                time="Now"
+                bot
+              >
+                <strong>
+                  {MACID.name} by {MACID.author}
+                </strong>
+                <p>Camera-based face unlock for macOS.</p>
+                <div className="dm-links">
+                  <span>Project</span>
+                  <a href={MACID.website}>macid.akshith.io ↗</a>
+                  <span>Source code</span>
+                  <a href={MACID.repository}>github.com/akshithio/macid ↗</a>
                 </div>
-                <p className="channel-link">#launch ↗</p>
+                <a className="source-pill" href={MACID.originalPost}>
+                  <span>#</span> 🚢ship · Original post <span>↗</span>
+                </a>
               </Message>
             </Reveal>
           </div>
           <Reveal delay={85} className="result-caption">
             <span className="result-dot" />
-            Sent with your bot
+            Delivered through your bot
           </Reveal>
         </div>
       </div>
