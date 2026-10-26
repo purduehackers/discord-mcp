@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Deleting a scheduled event…",
-    "openai/toolInvocation/invoked": "Scheduled event deleted",
+    "openai/toolInvocation/invoked": "Deleted scheduled event",
     "anthropic/searchHint": "delete cancel a Discord scheduled event",
   },
 } satisfies ToolMetadata;

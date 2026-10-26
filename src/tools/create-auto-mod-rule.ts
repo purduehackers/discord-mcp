@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Creating an AutoMod rule…",
-    "openai/toolInvocation/invoked": "AutoMod rule created",
+    "openai/toolInvocation/invoked": "Created AutoMod rule",
     "anthropic/searchHint": "create Discord automatic moderation keyword spam filters",
   },
 } satisfies ToolMetadata;

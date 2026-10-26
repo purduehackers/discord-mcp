@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing server bans…",
-    "openai/toolInvocation/invoked": "Server bans listed",
+    "openai/toolInvocation/invoked": "Listed server bans",
     "anthropic/searchHint": "list banned Discord server users with reasons",
   },
 } satisfies ToolMetadata;

@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Updating server settings…",
-    "openai/toolInvocation/invoked": "Server settings updated",
+    "openai/toolInvocation/invoked": "Updated server settings",
     "anthropic/searchHint": "edit Discord guild server name artwork settings channels",
   },
 } satisfies ToolMetadata;

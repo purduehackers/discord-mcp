@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Deleting a custom emoji…",
-    "openai/toolInvocation/invoked": "Custom emoji deleted",
+    "openai/toolInvocation/invoked": "Deleted custom emoji",
     "anthropic/searchHint": "delete remove a custom Discord server emoji",
   },
 } satisfies ToolMetadata;

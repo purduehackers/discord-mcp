@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Revoking an invite…",
-    "openai/toolInvocation/invoked": "Invite revoked",
+    "openai/toolInvocation/invoked": "Revoked invite",
     "anthropic/searchHint": "revoke delete a Discord invitation link",
   },
 } satisfies ToolMetadata;

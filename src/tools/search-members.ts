@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Searching server members…",
-    "openai/toolInvocation/invoked": "Member search completed",
+    "openai/toolInvocation/invoked": "Searched server members",
     "anthropic/searchHint": "find Discord guild members by username or nickname prefix",
   },
 } satisfies ToolMetadata;

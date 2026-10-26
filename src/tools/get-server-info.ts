@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading server details…",
-    "openai/toolInvocation/invoked": "Server details read",
+    "openai/toolInvocation/invoked": "Read server details",
     "anthropic/searchHint": "inspect Discord guild server settings counts features",
   },
 } satisfies ToolMetadata;

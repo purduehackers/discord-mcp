@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Clearing message reactions…",
-    "openai/toolInvocation/invoked": "Message reactions cleared",
+    "openai/toolInvocation/invoked": "Cleared message reactions",
     "anthropic/searchHint": "remove all reactions or one emoji from a Discord message",
   },
 } satisfies ToolMetadata;

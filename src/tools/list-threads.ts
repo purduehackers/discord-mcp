@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing active threads…",
-    "openai/toolInvocation/invoked": "Active threads listed",
+    "openai/toolInvocation/invoked": "Listed active threads",
     "anthropic/searchHint": "find active Discord server threads",
   },
 } satisfies ToolMetadata;

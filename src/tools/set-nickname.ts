@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Updating a member nickname…",
-    "openai/toolInvocation/invoked": "Member nickname updated",
+    "openai/toolInvocation/invoked": "Updated member nickname",
     "anthropic/searchHint": "set change clear a Discord guild member nickname",
   },
 } satisfies ToolMetadata;

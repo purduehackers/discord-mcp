@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing server webhooks…",
-    "openai/toolInvocation/invoked": "Server webhooks listed",
+    "openai/toolInvocation/invoked": "Listed server webhooks",
     "anthropic/searchHint": "list Discord webhook integrations across a guild server",
   },
 } satisfies ToolMetadata;

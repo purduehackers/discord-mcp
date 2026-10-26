@@ -20,7 +20,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing server members…",
-    "openai/toolInvocation/invoked": "Server members listed",
+    "openai/toolInvocation/invoked": "Listed server members",
     "anthropic/searchHint": "list Discord guild server members with pagination",
   },
 } satisfies ToolMetadata;

@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Updating a sticker…",
-    "openai/toolInvocation/invoked": "Sticker updated",
+    "openai/toolInvocation/invoked": "Updated sticker",
     "anthropic/searchHint": "edit Discord sticker name description tags",
   },
 } satisfies ToolMetadata;

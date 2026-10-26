@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Creating a scheduled event…",
-    "openai/toolInvocation/invoked": "Scheduled event created",
+    "openai/toolInvocation/invoked": "Created scheduled event",
     "anthropic/searchHint": "schedule a Discord voice stage or external event",
   },
 } satisfies ToolMetadata;

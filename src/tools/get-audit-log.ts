@@ -20,7 +20,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading the audit log…",
-    "openai/toolInvocation/invoked": "Audit log read",
+    "openai/toolInvocation/invoked": "Read audit log",
     "anthropic/searchHint": "inspect Discord server moderation administrative audit history",
   },
 } satisfies ToolMetadata;

@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Deleting a message…",
-    "openai/toolInvocation/invoked": "Message deleted",
+    "openai/toolInvocation/invoked": "Deleted message",
     "anthropic/searchHint": "delete remove one Discord channel message",
   },
 } satisfies ToolMetadata;

@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading an AutoMod rule…",
-    "openai/toolInvocation/invoked": "AutoMod rule read",
+    "openai/toolInvocation/invoked": "Read AutoMod rule",
     "anthropic/searchHint": "inspect one Discord automatic moderation rule",
   },
 } satisfies ToolMetadata;

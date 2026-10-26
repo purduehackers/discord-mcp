@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Adding a reaction…",
-    "openai/toolInvocation/invoked": "Reaction added",
+    "openai/toolInvocation/invoked": "Added reaction",
     "anthropic/searchHint": "react to a Discord message with emoji",
   },
 } satisfies ToolMetadata;

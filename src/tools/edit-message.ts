@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Updating a message…",
-    "openai/toolInvocation/invoked": "Message updated",
+    "openai/toolInvocation/invoked": "Updated message",
     "anthropic/searchHint": "edit update an existing Discord message content embeds attachments",
   },
 } satisfies ToolMetadata;

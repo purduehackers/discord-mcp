@@ -20,7 +20,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing Discord servers…",
-    "openai/toolInvocation/invoked": "Discord servers listed",
+    "openai/toolInvocation/invoked": "Listed Discord servers",
     "anthropic/searchHint": "discover accessible Discord guilds servers and their IDs",
     "anthropic/alwaysLoad": true,
   },

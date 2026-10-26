@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Deleting an AutoMod rule…",
-    "openai/toolInvocation/invoked": "AutoMod rule deleted",
+    "openai/toolInvocation/invoked": "Deleted AutoMod rule",
     "anthropic/searchHint": "delete remove a Discord automatic moderation rule",
   },
 } satisfies ToolMetadata;

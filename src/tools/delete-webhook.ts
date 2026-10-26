@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Deleting a webhook…",
-    "openai/toolInvocation/invoked": "Webhook deleted",
+    "openai/toolInvocation/invoked": "Deleted webhook",
     "anthropic/searchHint": "delete remove a Discord webhook integration",
   },
 } satisfies ToolMetadata;

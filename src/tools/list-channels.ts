@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing server channels…",
-    "openai/toolInvocation/invoked": "Server channels listed",
+    "openai/toolInvocation/invoked": "Listed server channels",
     "anthropic/searchHint": "find Discord guild channels and categories by name or ID",
   },
 } satisfies ToolMetadata;

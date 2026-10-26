@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Following an announcement channel…",
-    "openai/toolInvocation/invoked": "Announcement channel followed",
+    "openai/toolInvocation/invoked": "Followed announcement channel",
     "anthropic/searchHint": "subscribe a Discord channel to another channel announcements",
   },
 } satisfies ToolMetadata;

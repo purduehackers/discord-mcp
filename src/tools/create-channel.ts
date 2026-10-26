@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Creating a channel…",
-    "openai/toolInvocation/invoked": "Channel created",
+    "openai/toolInvocation/invoked": "Created channel",
     "anthropic/searchHint": "create a Discord server channel or category",
   },
 } satisfies ToolMetadata;

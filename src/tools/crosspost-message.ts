@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Publishing an announcement…",
-    "openai/toolInvocation/invoked": "Announcement published",
+    "openai/toolInvocation/invoked": "Published announcement",
     "anthropic/searchHint": "publish crosspost a Discord announcement to following channels",
   },
 } satisfies ToolMetadata;

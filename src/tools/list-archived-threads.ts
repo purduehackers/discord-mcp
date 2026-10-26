@@ -20,7 +20,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing archived threads…",
-    "openai/toolInvocation/invoked": "Archived threads listed",
+    "openai/toolInvocation/invoked": "Listed archived threads",
     "anthropic/searchHint": "find archived public private joined Discord threads",
   },
 } satisfies ToolMetadata;

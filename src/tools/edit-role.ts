@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Updating a role…",
-    "openai/toolInvocation/invoked": "Role updated",
+    "openai/toolInvocation/invoked": "Updated role",
     "anthropic/searchHint": "edit Discord role name permissions color appearance",
   },
 } satisfies ToolMetadata;

@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing channel invites…",
-    "openai/toolInvocation/invoked": "Channel invites listed",
+    "openai/toolInvocation/invoked": "Listed channel invites",
     "anthropic/searchHint": "list existing Discord channel invitation links",
   },
 } satisfies ToolMetadata;

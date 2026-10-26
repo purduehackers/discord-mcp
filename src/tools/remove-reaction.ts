@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Removing a reaction…",
-    "openai/toolInvocation/invoked": "Reaction removed",
+    "openai/toolInvocation/invoked": "Removed reaction",
     "anthropic/searchHint": "remove a Discord message reaction for the bot or another user",
   },
 } satisfies ToolMetadata;

@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Checking Discord identity…",
-    "openai/toolInvocation/invoked": "Discord identity checked",
+    "openai/toolInvocation/invoked": "Checked Discord identity",
     "anthropic/searchHint": "identify the Discord bot or user authenticated by this token",
   },
 } satisfies ToolMetadata;

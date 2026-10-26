@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Assigning a role…",
-    "openai/toolInvocation/invoked": "Role assigned",
+    "openai/toolInvocation/invoked": "Assigned role",
     "anthropic/searchHint": "give a Discord member a role",
   },
 } satisfies ToolMetadata;

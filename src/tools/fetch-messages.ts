@@ -20,7 +20,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading channel messages…",
-    "openai/toolInvocation/invoked": "Channel messages read",
+    "openai/toolInvocation/invoked": "Read channel messages",
     "anthropic/searchHint": "read fetch Discord channel message history with pagination",
   },
 } satisfies ToolMetadata;

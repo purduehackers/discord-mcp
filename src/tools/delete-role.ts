@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Deleting a role…",
-    "openai/toolInvocation/invoked": "Role deleted",
+    "openai/toolInvocation/invoked": "Deleted role",
     "anthropic/searchHint": "delete a Discord role from the server and all members",
   },
 } satisfies ToolMetadata;

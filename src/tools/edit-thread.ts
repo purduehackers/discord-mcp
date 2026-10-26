@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Updating a thread…",
-    "openai/toolInvocation/invoked": "Thread updated",
+    "openai/toolInvocation/invoked": "Updated thread",
     "anthropic/searchHint": "edit archive unarchive lock a Discord thread",
   },
 } satisfies ToolMetadata;

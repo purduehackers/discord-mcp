@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Creating a thread…",
-    "openai/toolInvocation/invoked": "Thread created",
+    "openai/toolInvocation/invoked": "Created thread",
     "anthropic/searchHint": "create a public or private Discord channel thread",
   },
 } satisfies ToolMetadata;

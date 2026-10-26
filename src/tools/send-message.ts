@@ -23,7 +23,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Sending a message…",
-    "openai/toolInvocation/invoked": "Message sent",
+    "openai/toolInvocation/invoked": "Sent message",
     "anthropic/searchHint": "send post reply Discord messages with files embeds mentions",
   },
 } satisfies ToolMetadata;

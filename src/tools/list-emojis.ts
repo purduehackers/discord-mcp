@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing custom emoji…",
-    "openai/toolInvocation/invoked": "Custom emoji listed",
+    "openai/toolInvocation/invoked": "Listed custom emoji",
     "anthropic/searchHint": "find available custom Discord server emoji IDs",
   },
 } satisfies ToolMetadata;

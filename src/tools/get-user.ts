@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading user details…",
-    "openai/toolInvocation/invoked": "User details read",
+    "openai/toolInvocation/invoked": "Read user details",
     "anthropic/searchHint": "look up a Discord user profile by ID",
   },
 } satisfies ToolMetadata;

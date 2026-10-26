@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Listing server roles…",
-    "openai/toolInvocation/invoked": "Server roles listed",
+    "openai/toolInvocation/invoked": "Listed server roles",
     "anthropic/searchHint": "find Discord server roles IDs and permissions",
   },
 } satisfies ToolMetadata;

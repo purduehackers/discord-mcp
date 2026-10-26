@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Unpinning a message…",
-    "openai/toolInvocation/invoked": "Message unpinned",
+    "openai/toolInvocation/invoked": "Unpinned message",
     "anthropic/searchHint": "unpin remove a Discord message from channel pins",
   },
 } satisfies ToolMetadata;

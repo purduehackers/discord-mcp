@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Updating a channel…",
-    "openai/toolInvocation/invoked": "Channel updated",
+    "openai/toolInvocation/invoked": "Updated channel",
     "anthropic/searchHint": "edit Discord channel name topic settings permissions",
   },
 } satisfies ToolMetadata;

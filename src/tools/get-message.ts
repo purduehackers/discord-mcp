@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading a message…",
-    "openai/toolInvocation/invoked": "Message read",
+    "openai/toolInvocation/invoked": "Read message",
     "anthropic/searchHint": "fetch one Discord message by channel and message ID",
   },
 } satisfies ToolMetadata;

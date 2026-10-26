@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Kicking a member…",
-    "openai/toolInvocation/invoked": "Member kicked",
+    "openai/toolInvocation/invoked": "Kicked member",
     "anthropic/searchHint": "kick remove a Discord member from a server",
   },
 } satisfies ToolMetadata;

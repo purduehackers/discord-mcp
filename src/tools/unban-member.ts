@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Removing a member ban…",
-    "openai/toolInvocation/invoked": "Member ban removed",
+    "openai/toolInvocation/invoked": "Unbanned member",
     "anthropic/searchHint": "unban forgive remove a Discord server user ban",
   },
 } satisfies ToolMetadata;

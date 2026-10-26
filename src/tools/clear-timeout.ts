@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Clearing member timeout…",
-    "openai/toolInvocation/invoked": "Member timeout cleared",
+    "openai/toolInvocation/invoked": "Cleared member timeout",
     "anthropic/searchHint": "remove a Discord member communication timeout",
   },
 } satisfies ToolMetadata;

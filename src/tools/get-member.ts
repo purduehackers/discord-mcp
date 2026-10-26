@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading member details…",
-    "openai/toolInvocation/invoked": "Member details read",
+    "openai/toolInvocation/invoked": "Read member details",
     "anthropic/searchHint": "inspect a Discord guild member nickname roles timeout",
   },
 } satisfies ToolMetadata;

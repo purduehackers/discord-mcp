@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading the server vanity URL…",
-    "openai/toolInvocation/invoked": "Server vanity URL read",
+    "openai/toolInvocation/invoked": "Read server vanity URL",
     "anthropic/searchHint": "find a Discord server custom invitation vanity URL",
   },
 } satisfies ToolMetadata;

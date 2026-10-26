@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Pinning a message…",
-    "openai/toolInvocation/invoked": "Message pinned",
+    "openai/toolInvocation/invoked": "Pinned message",
     "anthropic/searchHint": "pin a Discord channel message",
   },
 } satisfies ToolMetadata;

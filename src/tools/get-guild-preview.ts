@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Reading a server preview…",
-    "openai/toolInvocation/invoked": "Server preview read",
+    "openai/toolInvocation/invoked": "Read server preview",
     "anthropic/searchHint": "preview public discoverable Discord guild server information",
   },
 } satisfies ToolMetadata;

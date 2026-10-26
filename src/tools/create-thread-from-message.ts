@@ -18,7 +18,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Starting a message thread…",
-    "openai/toolInvocation/invoked": "Message thread started",
+    "openai/toolInvocation/invoked": "Started message thread",
     "anthropic/searchHint": "start a Discord reply thread on an existing message",
   },
 } satisfies ToolMetadata;

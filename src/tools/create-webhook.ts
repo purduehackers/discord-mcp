@@ -19,7 +19,7 @@ export const metadata = {
   },
   _meta: {
     "openai/toolInvocation/invoking": "Creating a webhook…",
-    "openai/toolInvocation/invoked": "Webhook created",
+    "openai/toolInvocation/invoked": "Created webhook",
     "anthropic/searchHint": "create a Discord channel webhook integration",
   },
 } satisfies ToolMetadata;
