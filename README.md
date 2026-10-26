@@ -10,6 +10,8 @@ https://discord.purduehackers.com/mcp
 73 typed tools cover messages, channels, threads, members, roles, guilds, invites, emoji, stickers, events, moderation, webhooks, and audit logs.
 Built with [xmcp](https://xmcp.dev) and [`@discordjs/rest`](https://discord.js.org/docs/packages/rest/stable).
 
+Tools include readable titles, Codex status labels, and Claude search hints. Results include a short summary alongside JSON and structured data.
+
 ## Get a token
 
 1. Create an application in the [Discord Developer Portal](https://discord.com/developers/applications) and copy its **Bot** token.

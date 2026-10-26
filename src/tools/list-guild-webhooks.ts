@@ -10,10 +10,16 @@ export const metadata = {
   name: "list_guild_webhooks",
   description: "List webhook metadata across all channels in a guild.",
   annotations: {
+    title: "List server webhooks",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Listing server webhooks…",
+    "openai/toolInvocation/invoked": "Server webhooks listed",
+    "anthropic/searchHint": "list Discord webhook integrations across a guild server",
   },
 } satisfies ToolMetadata;
 
@@ -22,15 +28,12 @@ export default function listGuildWebhooks(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.guildInput,
-    schemas.webhookListOutput,
-    input,
-    context,
-    async (input, rest, signal) => ({
+  return discordRequest(schemas.guildInput, schemas.webhookListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => ({
       webhooks: await rest.get(Routes.guildWebhooks(input.guild_id), {
         signal,
       }),
     }),
-  );
+  });
 }

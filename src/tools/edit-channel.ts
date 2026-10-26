@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "Update selected channel settings. Pass null to clear a parent category or automatic voice region.",
   annotations: {
+    title: "Edit a channel",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Updating a channel…",
+    "openai/toolInvocation/invoked": "Channel updated",
+    "anthropic/searchHint": "edit Discord channel name topic settings permissions",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function editChannel(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.editChannelInput,
-    schemas.channelOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.editChannelInput, schemas.channelOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { channel_id, reason, ...body } = input;
       return {
         channel: await rest.patch(Routes.channel(channel_id), {
@@ -38,5 +41,5 @@ export default function editChannel(
         }),
       };
     },
-  );
+  });
 }

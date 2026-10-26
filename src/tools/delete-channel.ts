@@ -10,10 +10,16 @@ export const metadata = {
   name: "delete_channel",
   description: "Delete a channel and its message history, or remove a category.",
   annotations: {
+    title: "Delete a channel",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Deleting a channel…",
+    "openai/toolInvocation/invoked": "Channel deleted",
+    "anthropic/searchHint": "delete a Discord channel category and its history",
   },
 } satisfies ToolMetadata;
 
@@ -22,12 +28,9 @@ export default function deleteChannel(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.deleteChannelInput,
-    schemas.channelOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.deleteChannelInput, schemas.channelOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       return {
         channel: await rest.delete(Routes.channel(input.channel_id), {
           reason: input.reason,
@@ -35,5 +38,5 @@ export default function deleteChannel(
         }),
       };
     },
-  );
+  });
 }

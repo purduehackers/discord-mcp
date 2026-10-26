@@ -10,10 +10,16 @@ export const metadata = {
   name: "create_thread",
   description: "Create a standalone public or private thread in a text channel.",
   annotations: {
+    title: "Create a thread",
     readOnlyHint: false,
     destructiveHint: false,
     idempotentHint: false,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Creating a thread…",
+    "openai/toolInvocation/invoked": "Thread created",
+    "anthropic/searchHint": "create a public or private Discord channel thread",
   },
 } satisfies ToolMetadata;
 
@@ -22,12 +28,9 @@ export default function createThread(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.createInput,
-    schemas.threadOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.createInput, schemas.threadOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { channel_id, reason, ...body } = input;
       return {
         thread: await rest.post(Routes.threads(channel_id), {
@@ -37,5 +40,5 @@ export default function createThread(
         }),
       };
     },
-  );
+  });
 }

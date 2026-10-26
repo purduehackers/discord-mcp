@@ -10,10 +10,16 @@ export const metadata = {
   name: "list_invites",
   description: "List the guild's invites and usage metadata.",
   annotations: {
+    title: "List channel invites",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Listing channel invites…",
+    "openai/toolInvocation/invoked": "Channel invites listed",
+    "anthropic/searchHint": "list existing Discord channel invitation links",
   },
 } satisfies ToolMetadata;
 
@@ -22,17 +28,14 @@ export default function listInvites(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.listInput,
-    schemas.inviteListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.listInput, schemas.inviteListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       return {
         invites: await rest.get(Routes.guildInvites(input.guild_id), {
           signal,
         }),
       };
     },
-  );
+  });
 }

@@ -11,10 +11,16 @@ export const metadata = {
   name: "search_members",
   description: "Search guild members by username or nickname prefix.",
   annotations: {
+    title: "Search server members",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Searching server members…",
+    "openai/toolInvocation/invoked": "Member search completed",
+    "anthropic/searchHint": "find Discord guild members by username or nickname prefix",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function searchMembers(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.searchInput,
-    schemas.memberListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.searchInput, schemas.memberListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, ...query } = input;
       return {
         members: await rest.get(Routes.guildMembersSearch(guild_id), {
@@ -37,5 +40,5 @@ export default function searchMembers(
         }),
       };
     },
-  );
+  });
 }

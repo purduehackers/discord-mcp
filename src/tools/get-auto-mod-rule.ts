@@ -10,10 +10,16 @@ export const metadata = {
   name: "get_auto_mod_rule",
   description: "Read one auto-moderation rule.",
   annotations: {
+    title: "Read an AutoMod rule",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Reading an AutoMod rule…",
+    "openai/toolInvocation/invoked": "AutoMod rule read",
+    "anthropic/searchHint": "inspect one Discord automatic moderation rule",
   },
 } satisfies ToolMetadata;
 
@@ -22,17 +28,14 @@ export default function getAutoModRule(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.ruleInput,
-    schemas.ruleOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.ruleInput, schemas.ruleOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       return {
         rule: await rest.get(Routes.guildAutoModerationRule(input.guild_id, input.rule_id), {
           signal,
         }),
       };
     },
-  );
+  });
 }

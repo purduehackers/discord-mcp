@@ -10,10 +10,16 @@ export const metadata = {
   name: "delete_invite",
   description: "Revoke an invite code for everyone who has it.",
   annotations: {
+    title: "Revoke an invite",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Revoking an invite…",
+    "openai/toolInvocation/invoked": "Invite revoked",
+    "anthropic/searchHint": "revoke delete a Discord invitation link",
   },
 } satisfies ToolMetadata;
 
@@ -22,12 +28,9 @@ export default function deleteInvite(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.deleteInput,
-    schemas.inviteOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.deleteInput, schemas.inviteOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       return {
         invite: await rest.delete(Routes.invite(input.code), {
           reason: input.reason,
@@ -35,5 +38,5 @@ export default function deleteInvite(
         }),
       };
     },
-  );
+  });
 }

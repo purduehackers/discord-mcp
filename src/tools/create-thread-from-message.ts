@@ -10,10 +10,16 @@ export const metadata = {
   name: "create_thread_from_message",
   description: "Start a thread attached to an existing channel message.",
   annotations: {
+    title: "Start a thread from a message",
     readOnlyHint: false,
     destructiveHint: false,
     idempotentHint: false,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Starting a message thread…",
+    "openai/toolInvocation/invoked": "Message thread started",
+    "anthropic/searchHint": "start a Discord reply thread on an existing message",
   },
 } satisfies ToolMetadata;
 
@@ -22,12 +28,9 @@ export default function createThreadFromMessage(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.fromMessageInput,
-    schemas.threadOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.fromMessageInput, schemas.threadOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { channel_id, message_id, reason, ...body } = input;
       return {
         thread: await rest.post(Routes.threads(channel_id, message_id), {
@@ -37,5 +40,5 @@ export default function createThreadFromMessage(
         }),
       };
     },
-  );
+  });
 }

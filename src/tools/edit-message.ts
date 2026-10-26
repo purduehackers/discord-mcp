@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "Edit a message authored by the current identity. Empty content or embeds explicitly clears that field.",
   annotations: {
+    title: "Edit a message",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Updating a message…",
+    "openai/toolInvocation/invoked": "Message updated",
+    "anthropic/searchHint": "edit update an existing Discord message content embeds attachments",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function editMessage(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.editInput,
-    schemas.messageOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.editInput, schemas.messageOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { channel_id, message_id, ...body } = input;
       return {
         message: await rest.patch(Routes.channelMessage(channel_id, message_id), {
@@ -37,5 +40,5 @@ export default function editMessage(
         }),
       };
     },
-  );
+  });
 }

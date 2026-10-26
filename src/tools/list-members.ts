@@ -12,10 +12,16 @@ export const metadata = {
   description:
     "Read one page of guild members. Requires the members intent; use the last user ID as after.",
   annotations: {
+    title: "List server members",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Listing server members…",
+    "openai/toolInvocation/invoked": "Server members listed",
+    "anthropic/searchHint": "list Discord guild server members with pagination",
   },
 } satisfies ToolMetadata;
 
@@ -24,12 +30,9 @@ export default function listMembers(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.listInput,
-    schemas.memberListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.listInput, schemas.memberListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, ...query } = input;
       return {
         members: await rest.get(Routes.guildMembers(guild_id), {
@@ -38,5 +41,5 @@ export default function listMembers(
         }),
       };
     },
-  );
+  });
 }

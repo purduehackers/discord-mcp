@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "List channel webhook metadata. Credential-bearing tokens and URLs are excluded from output.",
   annotations: {
+    title: "List channel webhooks",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Listing channel webhooks…",
+    "openai/toolInvocation/invoked": "Channel webhooks listed",
+    "anthropic/searchHint": "list Discord webhook integrations for a channel",
   },
 } satisfies ToolMetadata;
 
@@ -23,17 +29,14 @@ export default function listWebhooks(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.channelInput,
-    schemas.webhookListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.channelInput, schemas.webhookListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       return {
         webhooks: await rest.get(Routes.channelWebhooks(input.channel_id), {
           signal,
         }),
       };
     },
-  );
+  });
 }

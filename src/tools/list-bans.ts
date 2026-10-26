@@ -11,21 +11,24 @@ export const metadata = {
   name: "list_bans",
   description: "Read one page of guild bans and recorded reasons.",
   annotations: {
+    title: "List server bans",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
   },
+  _meta: {
+    "openai/toolInvocation/invoking": "Listing server bans…",
+    "openai/toolInvocation/invoked": "Server bans listed",
+    "anthropic/searchHint": "list banned Discord server users with reasons",
+  },
 } satisfies ToolMetadata;
 
 /** Read one page of guild bans and recorded reasons. */
 export default function listBans(input: InferSchema<typeof schema>, context: ToolExtraArguments) {
-  return discordRequest(
-    schemas.banListInput,
-    schemas.banListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.banListInput, schemas.banListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, ...query } = input;
       return {
         bans: await rest.get(Routes.guildBans(guild_id), {
@@ -34,5 +37,5 @@ export default function listBans(input: InferSchema<typeof schema>, context: Too
         }),
       };
     },
-  );
+  });
 }

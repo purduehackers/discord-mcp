@@ -15,10 +15,16 @@ export const metadata = {
   description:
     "Send a message with optional embeds, files, and a reply reference. Mentions are disabled unless explicitly selected.",
   annotations: {
+    title: "Send a message",
     readOnlyHint: false,
     destructiveHint: false,
     idempotentHint: false,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Sending a message…",
+    "openai/toolInvocation/invoked": "Message sent",
+    "anthropic/searchHint": "send post reply Discord messages with files embeds mentions",
   },
 } satisfies ToolMetadata;
 
@@ -27,12 +33,9 @@ export default function sendMessage(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.sendInput,
-    schemas.messageOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.sendInput, schemas.messageOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { channel_id, files, suppress_embeds, silent, ...body } = input;
       const flags =
         (suppress_embeds ? MessageFlags.SuppressEmbeds : 0) |
@@ -49,5 +52,5 @@ export default function sendMessage(
         }),
       };
     },
-  );
+  });
 }

@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "List a guild's channels and categories. Active threads are available through list_threads.",
   annotations: {
+    title: "List server channels",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Listing server channels…",
+    "openai/toolInvocation/invoked": "Server channels listed",
+    "anthropic/searchHint": "find Discord guild channels and categories by name or ID",
   },
 } satisfies ToolMetadata;
 
@@ -23,17 +29,14 @@ export default function listChannels(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.guildInput,
-    schemas.channelListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.guildInput, schemas.channelListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       return {
         channels: await rest.get(Routes.guildChannels(input.guild_id), {
           signal,
         }),
       };
     },
-  );
+  });
 }

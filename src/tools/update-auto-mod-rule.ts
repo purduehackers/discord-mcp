@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "Update a rule's settings, actions, or exemptions. Its trigger type cannot be changed.",
   annotations: {
+    title: "Edit an AutoMod rule",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Updating an AutoMod rule…",
+    "openai/toolInvocation/invoked": "AutoMod rule updated",
+    "anthropic/searchHint": "edit enable disable Discord automatic moderation rules exemptions",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function updateAutoModRule(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.editInput,
-    schemas.ruleOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.editInput, schemas.ruleOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, rule_id, reason, ...body } = input;
       return {
         rule: await rest.patch(Routes.guildAutoModerationRule(guild_id, rule_id), {
@@ -38,5 +41,5 @@ export default function updateAutoModRule(
         }),
       };
     },
-  );
+  });
 }

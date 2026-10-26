@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "Create a typed keyword, spam, preset, mention-spam, or member-profile auto-moderation rule.",
   annotations: {
+    title: "Create an AutoMod rule",
     readOnlyHint: false,
     destructiveHint: false,
     idempotentHint: false,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Creating an AutoMod rule…",
+    "openai/toolInvocation/invoked": "AutoMod rule created",
+    "anthropic/searchHint": "create Discord automatic moderation keyword spam filters",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function createAutoModRule(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.createInput,
-    schemas.ruleOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.createInput, schemas.ruleOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, reason, ...body } = input;
       return {
         rule: await rest.post(Routes.guildAutoModerationRules(guild_id), {
@@ -38,5 +41,5 @@ export default function createAutoModRule(
         }),
       };
     },
-  );
+  });
 }

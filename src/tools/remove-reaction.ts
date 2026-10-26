@@ -10,10 +10,16 @@ export const metadata = {
   name: "remove_reaction",
   description: "Remove a user's reaction. Use @me for the current identity.",
   annotations: {
+    title: "Remove a reaction",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Removing a reaction…",
+    "openai/toolInvocation/invoked": "Reaction removed",
+    "anthropic/searchHint": "remove a Discord message reaction for the bot or another user",
   },
 } satisfies ToolMetadata;
 
@@ -22,12 +28,9 @@ export default function removeReaction(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.removeReactionInput,
-    schemas.successSchema,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.removeReactionInput, schemas.successSchema, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const emoji = encodeURIComponent(input.emoji);
       const route =
         input.user_id === "@me"
@@ -41,5 +44,5 @@ export default function removeReaction(
       await rest.delete(route, { signal });
       return { success: true };
     },
-  );
+  });
 }

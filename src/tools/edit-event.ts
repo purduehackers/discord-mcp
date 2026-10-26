@@ -11,21 +11,24 @@ export const metadata = {
   description:
     "Update a scheduled event's fields or status. Discord enforces valid lifecycle transitions.",
   annotations: {
+    title: "Edit a scheduled event",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
   },
+  _meta: {
+    "openai/toolInvocation/invoking": "Updating a scheduled event…",
+    "openai/toolInvocation/invoked": "Scheduled event updated",
+    "anthropic/searchHint": "edit reschedule update a Discord event",
+  },
 } satisfies ToolMetadata;
 
 /** Update a scheduled event's fields or status. */
 export default function editEvent(input: InferSchema<typeof schema>, context: ToolExtraArguments) {
-  return discordRequest(
-    schemas.editInput,
-    schemas.eventOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.editInput, schemas.eventOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, event_id, reason, ...body } = input;
       return {
         event: await rest.patch(Routes.guildScheduledEvent(guild_id, event_id), {
@@ -35,5 +38,5 @@ export default function editEvent(input: InferSchema<typeof schema>, context: To
         }),
       };
     },
-  );
+  });
 }

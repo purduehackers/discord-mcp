@@ -12,10 +12,16 @@ export const metadata = {
   description:
     "Read one page of archived threads. Use the last archive_timestamp as before, or the thread ID for joined_private.",
   annotations: {
+    title: "List archived threads",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Listing archived threads…",
+    "openai/toolInvocation/invoked": "Archived threads listed",
+    "anthropic/searchHint": "find archived public private joined Discord threads",
   },
 } satisfies ToolMetadata;
 
@@ -24,12 +30,9 @@ export default function listArchivedThreads(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.archivedInput,
-    schemas.threadListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.archivedInput, schemas.threadListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const route =
         input.visibility === "joined_private"
           ? Routes.channelJoinedArchivedThreads(input.channel_id)
@@ -42,5 +45,5 @@ export default function listArchivedThreads(
         signal,
       });
     },
-  );
+  });
 }

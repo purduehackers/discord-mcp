@@ -10,10 +10,16 @@ export const metadata = {
   name: "create_channel",
   description: "Create a guild channel or category with typed Discord settings.",
   annotations: {
+    title: "Create a channel",
     readOnlyHint: false,
     destructiveHint: false,
     idempotentHint: false,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Creating a channel…",
+    "openai/toolInvocation/invoked": "Channel created",
+    "anthropic/searchHint": "create a Discord server channel or category",
   },
 } satisfies ToolMetadata;
 
@@ -22,12 +28,9 @@ export default function createChannel(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.createChannelInput,
-    schemas.channelOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.createChannelInput, schemas.channelOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, reason, ...body } = input;
       return {
         channel: await rest.post(Routes.guildChannels(guild_id), {
@@ -37,5 +40,5 @@ export default function createChannel(
         }),
       };
     },
-  );
+  });
 }

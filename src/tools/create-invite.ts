@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "Create a channel invite. The returned code forms https://discord.gg/<code>; max_age 0 makes it permanent.",
   annotations: {
+    title: "Create an invite",
     readOnlyHint: false,
     destructiveHint: false,
     idempotentHint: false,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Creating an invite…",
+    "openai/toolInvocation/invoked": "Invite created",
+    "anthropic/searchHint": "create a Discord channel invitation link",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function createInvite(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.createInput,
-    schemas.inviteOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.createInput, schemas.inviteOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { channel_id, reason, ...body } = input;
       return {
         invite: await rest.post(Routes.channelInvites(channel_id), {
@@ -38,5 +41,5 @@ export default function createInvite(
         }),
       };
     },
-  );
+  });
 }

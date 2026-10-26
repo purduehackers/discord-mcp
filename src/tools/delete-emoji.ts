@@ -10,10 +10,16 @@ export const metadata = {
   name: "delete_emoji",
   description: "Delete a guild's custom emoji.",
   annotations: {
+    title: "Delete a custom emoji",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Deleting a custom emoji…",
+    "openai/toolInvocation/invoked": "Custom emoji deleted",
+    "anthropic/searchHint": "delete remove a custom Discord server emoji",
   },
 } satisfies ToolMetadata;
 
@@ -22,17 +28,14 @@ export default function deleteEmoji(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.deleteInput,
-    schemas.successSchema,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.deleteInput, schemas.successSchema, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       await rest.delete(Routes.guildEmoji(input.guild_id, input.emoji_id), {
         reason: input.reason,
         signal,
       });
       return { success: true };
     },
-  );
+  });
 }

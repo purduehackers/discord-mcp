@@ -12,10 +12,16 @@ export const metadata = {
   description:
     "Read one page of channel messages. Use a returned message ID as before or after to paginate.",
   annotations: {
+    title: "Read channel messages",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Reading channel messages…",
+    "openai/toolInvocation/invoked": "Channel messages read",
+    "anthropic/searchHint": "read fetch Discord channel message history with pagination",
   },
 } satisfies ToolMetadata;
 
@@ -24,12 +30,9 @@ export default function fetchMessages(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.fetchInput,
-    schemas.messageListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.fetchInput, schemas.messageListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { channel_id, ...query } = input;
       return {
         messages: await rest.get(Routes.channelMessages(channel_id), {
@@ -38,5 +41,5 @@ export default function fetchMessages(
         }),
       };
     },
-  );
+  });
 }

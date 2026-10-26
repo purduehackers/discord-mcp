@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "Upload a guild sticker from base64 bytes, up to 512 KiB. Supply a filename matching its PNG, APNG, GIF, or JSON format.",
   annotations: {
+    title: "Upload a sticker",
     readOnlyHint: false,
     destructiveHint: false,
     idempotentHint: false,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Uploading a sticker…",
+    "openai/toolInvocation/invoked": "Sticker uploaded",
+    "anthropic/searchHint": "upload add a custom Discord server sticker",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function createSticker(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.createInput,
-    schemas.stickerOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.createInput, schemas.stickerOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, file, reason, ...body } = input;
       return {
         sticker: await rest.post(Routes.guildStickers(guild_id), {
@@ -47,5 +50,5 @@ export default function createSticker(
         }),
       };
     },
-  );
+  });
 }

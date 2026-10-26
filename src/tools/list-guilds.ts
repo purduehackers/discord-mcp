@@ -12,21 +12,25 @@ export const metadata = {
   description:
     "List one page of guilds accessible to the current identity. Use a returned guild ID as the next after cursor.",
   annotations: {
+    title: "List Discord servers",
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: true,
   },
+  _meta: {
+    "openai/toolInvocation/invoking": "Listing Discord servers…",
+    "openai/toolInvocation/invoked": "Discord servers listed",
+    "anthropic/searchHint": "discover accessible Discord guilds servers and their IDs",
+    "anthropic/alwaysLoad": true,
+  },
 } satisfies ToolMetadata;
 
 /** List one page of guilds accessible to the current identity. */
 export default function listGuilds(input: InferSchema<typeof schema>, context: ToolExtraArguments) {
-  return discordRequest(
-    schemas.guildListInput,
-    schemas.guildListOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.guildListInput, schemas.guildListOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       return {
         guilds: await rest.get(Routes.userGuilds(), {
           query: makeURLSearchParams<RESTGetAPICurrentUserGuildsQuery>(input),
@@ -34,5 +38,5 @@ export default function listGuilds(input: InferSchema<typeof schema>, context: T
         }),
       };
     },
-  );
+  });
 }

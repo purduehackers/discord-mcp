@@ -10,10 +10,16 @@ export const metadata = {
   name: "delete_webhook",
   description: "Delete a webhook and invalidate its integration URL.",
   annotations: {
+    title: "Delete a webhook",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Deleting a webhook…",
+    "openai/toolInvocation/invoked": "Webhook deleted",
+    "anthropic/searchHint": "delete remove a Discord webhook integration",
   },
 } satisfies ToolMetadata;
 
@@ -22,17 +28,14 @@ export default function deleteWebhook(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.deleteInput,
-    schemas.successSchema,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.deleteInput, schemas.successSchema, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       await rest.delete(Routes.webhook(input.webhook_id), {
         reason: input.reason,
         signal,
       });
       return { success: true };
     },
-  );
+  });
 }

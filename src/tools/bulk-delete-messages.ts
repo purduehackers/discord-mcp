@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "Delete 2–100 distinct messages less than 14 days old. Discord rejects older messages.",
   annotations: {
+    title: "Delete multiple messages",
     readOnlyHint: false,
     destructiveHint: true,
     idempotentHint: true,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Deleting messages…",
+    "openai/toolInvocation/invoked": "Messages deleted",
+    "anthropic/searchHint": "bulk delete recent Discord channel messages",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function bulkDeleteMessages(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.bulkDeleteInput,
-    schemas.successSchema,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.bulkDeleteInput, schemas.successSchema, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       await rest.post(Routes.channelBulkDelete(input.channel_id), {
         body: { messages: input.messages } satisfies RESTPostAPIChannelMessagesBulkDeleteJSONBody,
         reason: input.reason,
@@ -36,5 +39,5 @@ export default function bulkDeleteMessages(
       });
       return { success: true };
     },
-  );
+  });
 }

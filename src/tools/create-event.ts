@@ -11,10 +11,16 @@ export const metadata = {
   description:
     "Create a voice, stage, or external Discord event. External events require location and end time.",
   annotations: {
+    title: "Create a scheduled event",
     readOnlyHint: false,
     destructiveHint: false,
     idempotentHint: false,
     openWorldHint: true,
+  },
+  _meta: {
+    "openai/toolInvocation/invoking": "Creating a scheduled event…",
+    "openai/toolInvocation/invoked": "Scheduled event created",
+    "anthropic/searchHint": "schedule a Discord voice stage or external event",
   },
 } satisfies ToolMetadata;
 
@@ -23,12 +29,9 @@ export default function createEvent(
   input: InferSchema<typeof schema>,
   context: ToolExtraArguments,
 ) {
-  return discordRequest(
-    schemas.createInput,
-    schemas.eventOutput,
-    input,
-    context,
-    async (input, rest, signal) => {
+  return discordRequest(schemas.createInput, schemas.eventOutput, input, context, {
+    summary: metadata._meta["openai/toolInvocation/invoked"],
+    request: async (input, rest, signal) => {
       const { guild_id, reason, ...body } = input;
       return {
         event: await rest.post(Routes.guildScheduledEvents(guild_id), {
@@ -38,5 +41,5 @@ export default function createEvent(
         }),
       };
     },
-  );
+  });
 }

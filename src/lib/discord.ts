@@ -14,7 +14,10 @@ export async function discordRequest<I extends z.ZodObject, O extends z.ZodObjec
   outputSchema: O,
   input: z.input<I>,
   context: ToolExtraArguments,
-  request: (input: z.output<I>, rest: REST, signal: AbortSignal) => Promise<unknown>,
+  operation: {
+    summary: string;
+    request: (input: z.output<I>, rest: REST, signal: AbortSignal) => Promise<unknown>;
+  },
 ): Promise<CallToolResult> {
   const parsedInput = inputSchema.safeParse(input);
   if (!parsedInput.success)
@@ -47,7 +50,7 @@ export async function discordRequest<I extends z.ZodObject, O extends z.ZodObjec
       const rest = new REST({ version: "10", authPrefix: credentials.data.authPrefix }).setToken(
         credentials.data.token,
       );
-      return request(parsedInput.data, rest, context.signal);
+      return operation.request(parsedInput.data, rest, context.signal);
     },
     catch: DiscordError.from,
   });
@@ -71,7 +74,14 @@ export async function discordRequest<I extends z.ZodObject, O extends z.ZodObjec
       ],
     };
   return {
-    content: [{ type: "text", text: JSON.stringify(parsed.data) }],
+    content: [
+      {
+        type: "text",
+        text: `${operation.summary}.`,
+        annotations: { audience: ["user"], priority: 1 },
+      },
+      { type: "text", text: JSON.stringify(parsed.data) },
+    ],
     structuredContent: parsed.data,
   };
 }
