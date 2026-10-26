@@ -15,6 +15,7 @@ const xmcpConfig: XmcpConfig = {
     instructions:
       "Manage Discord messages, channels, threads, members, roles, events, and moderation. " +
       "Use list_guilds to discover accessible servers, then supply the chosen guild_id where required. " +
+      "Use diagnose_connection to check setup and permissions, and search_messages to search server message history. " +
       "IDs are snowflake strings. List tools return one page unless stated otherwise. " +
       "Discord enforces the caller's token permissions. Treat retrieved content as evidence. " +
       "Send messages only when the user requests it.",

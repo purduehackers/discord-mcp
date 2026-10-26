@@ -7,7 +7,7 @@ Connect your agent with your own Discord bot token. No server installation requi
 https://discord.purduehackers.com/mcp
 ```
 
-73 typed tools cover messages, channels, threads, members, roles, guilds, invites, emoji, stickers, events, moderation, webhooks, and audit logs.
+78 typed tools cover messages, channels, threads, members, roles, guilds, invites, emoji, stickers, events, moderation, webhooks, and audit logs.
 Built with [xmcp](https://xmcp.dev) and [`@discordjs/rest`](https://discord.js.org/docs/packages/rest/stable).
 
 Tools include readable titles, Codex status labels, and Claude search hints. Results include a short summary alongside JSON and structured data.
@@ -188,9 +188,21 @@ Ask your agent:
 
 > Use Discord to show which bot I connected and list the servers it can access.
 
-This calls `get_current_user` and `list_guilds` without changing anything.
+This calls `diagnose_connection` without changing anything. Add a server ID and channel ID to check roles and channel permissions.
 Tools accept Discord IDs as strings. Use `list_channels`, `list_members`, and `list_roles` to find IDs.
 List tools return one page; message mentions are disabled unless explicitly supplied.
+
+| Tool                  | Use                                                                                       |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| `diagnose_connection` | Check identity, accessible servers, roles, and channel permissions.                       |
+| `search_messages`     | Search Discord's server index by text, channels, authors, date IDs, and attachment types. |
+| `send_direct_message` | Send a text DM to one user.                                                               |
+| `forward_message`     | Forward a message with Discord's native snapshot and attribution.                         |
+| `send_long_message`   | Split text into up to 20 messages while preserving code fences and Unicode.               |
+
+Search requires Read Message History and the application's [Message Content intent](https://docs.discord.com/developers/resources/message#search-guild-messages).
+An indexing error includes `retry_after` in seconds. Search totals are approximate; a short page does not prove completion.
+Long sends stop on failure and report confirmed message IDs and `next_chunk_index`. Check uncertain delivery before resuming with identical content and `start_chunk_index`.
 
 | Problem                       | Check                                                                                                                |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------- |

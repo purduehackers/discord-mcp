@@ -41,7 +41,7 @@ export const embedSchema = z.strictObject({
     .max(25)
     .optional(),
 }) satisfies z.ZodType<APIEmbed>;
-export const messageSchema = z
+const baseMessageSchema = z
   .strictObject({
     id: snowflakeSchema,
     channel_id: snowflakeSchema,
@@ -50,6 +50,8 @@ export const messageSchema = z
     timestamp: z.string(),
     edited_timestamp: z.string().nullable(),
     pinned: z.boolean(),
+    type: z.int().optional(),
+    flags: z.int().optional(),
     attachments: z.array(
       z
         .strictObject({
@@ -87,6 +89,7 @@ export const messageSchema = z
     ),
     message_reference: z
       .strictObject({
+        type: z.literal([0, 1]).optional(),
         message_id: snowflakeSchema.optional(),
         channel_id: snowflakeSchema.optional(),
         guild_id: snowflakeSchema.optional(),
@@ -97,6 +100,25 @@ export const messageSchema = z
   .strip() satisfies z.ZodType<
   Pick<APIMessage, "id" | "channel_id" | "content" | "timestamp" | "edited_timestamp" | "pinned">
 >;
+export const messageSchema = baseMessageSchema.extend({
+  message_snapshots: z
+    .array(
+      z
+        .strictObject({
+          message: baseMessageSchema.pick({
+            type: true,
+            flags: true,
+            content: true,
+            timestamp: true,
+            edited_timestamp: true,
+            attachments: true,
+            embeds: true,
+          }),
+        })
+        .strip(),
+    )
+    .optional(),
+});
 export const messageInput = z.strictObject({
   channel_id: snowflakeSchema,
   message_id: snowflakeSchema,
@@ -199,4 +221,41 @@ export const reactionInput = z.strictObject({
 });
 export const removeReactionInput = reactionInput.extend({
   user_id: z.union([snowflakeSchema, z.literal("@me")]).default("@me"),
+});
+export const directMessageInput = z.strictObject({
+  recipient_id: snowflakeSchema,
+  content: z.string().min(1).max(2000),
+  allowed_mentions: mentionsSchema.default({ parse: [] }),
+  silent: z.boolean().default(false),
+});
+export const forwardInput = z.strictObject({
+  channel_id: snowflakeSchema.describe("Destination channel ID."),
+  source_channel_id: snowflakeSchema,
+  message_id: snowflakeSchema.describe("Message to forward from the source channel."),
+  silent: z.boolean().default(false),
+});
+export const longMessageInput = z.strictObject({
+  channel_id: snowflakeSchema,
+  content: z.string().min(1).max(32_000),
+  max_chunks: z.int().min(1).max(20).default(20),
+  start_chunk_index: z
+    .int()
+    .min(0)
+    .max(19)
+    .default(0)
+    .describe(
+      "Resume with the exact original content after inspecting a partial failure. Zero-based.",
+    ),
+  allowed_mentions: mentionsSchema.default({ parse: [] }),
+  silent: z.boolean().default(false),
+});
+export const sentMessageSchema = z
+  .strictObject({
+    id: snowflakeSchema,
+    channel_id: snowflakeSchema,
+  })
+  .strip();
+export const longMessageOutput = z.strictObject({
+  sent_messages: z.array(sentMessageSchema.extend({ chunk_index: z.int().min(0) })),
+  total_chunks: z.int().min(1),
 });
