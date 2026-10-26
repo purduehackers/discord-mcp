@@ -170,7 +170,7 @@ h1 span {
 .workflow-grid {
   position: relative;
   display: grid;
-  grid-template-columns: 740px 952px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 36px;
   margin-top: 48px;
 }
@@ -348,162 +348,21 @@ a {
   font-weight: 400;
   box-shadow: 0 16px 45px #0008;
 }
-.discord-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 0 0 36px;
-  padding: 0 16px;
-  background: #1e1f22;
-  color: #b5bac1;
-  font-size: 14px;
-  font-weight: 600;
-}
-.discord-titlebar svg {
-  width: 17px;
-}
-.discord-workspace {
-  display: grid;
-  grid-template-columns: 64px 180px minmax(0, 1fr);
-  min-height: 0;
-  flex: 1;
-}
-.guild-rail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  padding-top: 14px;
-  background: #1e1f22;
-}
-.guild-icon {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: #313338;
-  border-radius: 15px;
-  color: #dbdee1;
-}
-.guild-icon > img {
-  width: 44px;
-  height: 44px;
-  border-radius: inherit;
-}
-.guild-icon > svg {
-  width: 28px;
-}
-.guild-icon.selected::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: -10px;
-  width: 4px;
-  height: 32px;
-  border-radius: 0 4px 4px 0;
-  background: #ffffff;
-}
-.discord-home.selected {
-  background: #5865f2;
-  color: #ffffff;
-}
-.guild-separator {
-  width: 30px;
-  height: 2px;
-  background: #35363c;
-}
-.add-server {
-  color: #23a55a;
-  border-radius: 50%;
-  font-size: 34px;
-  font-weight: 300;
-}
-.channel-sidebar {
-  background: #2b2d31;
-  min-width: 0;
-}
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 58px;
-  padding: 0 12px;
-  border-bottom: 1px solid #202225;
-  color: #f2f3f5;
-  font-weight: 600;
-  font-size: 17px;
-}
-.channel-list {
-  padding: 20px 8px;
-}
-.sidebar-section {
-  color: #949ba4;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.035em;
-  margin: 12px 4px;
-}
-.sidebar-channel {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px;
-  margin: 2px 0;
-  color: #949ba4;
-  font-size: 18px;
-}
-.sidebar-channel > span {
-  font-size: 24px;
-  color: #80848e;
-}
-.channel-sidebar .selected {
-  background: #404249;
-  color: #f2f3f5;
-  border-radius: 4px;
-}
-.sidebar-search {
-  padding: 9px 7px;
-  background: #1e1f22;
-  border-radius: 4px;
-  color: #949ba4;
-  font-size: 13px;
-  margin-bottom: 22px;
-}
-.sidebar-dm {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 7px;
-  font-size: 15px;
-}
-.sidebar-dm img {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-}
-.discord-chat {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-}
-.discord-toolbar {
+.discord-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  flex: 0 0 58px;
-  padding: 0 20px;
-  border-bottom: 1px solid #27292d;
+  flex: 0 0 72px;
+  padding: 0 28px;
+  border-bottom: 1px solid #42444b;
   color: #f2f3f5;
-  font-size: 20px;
+  font-size: 22px;
 }
-.discord-toolbar strong {
+.discord-header strong {
   font-weight: 600;
 }
 .channel-hash {
-  color: #80848e;
+  color: #949ba4;
   font-size: 28px;
 }
 .toolbar-avatar {
@@ -511,42 +370,21 @@ a {
   height: 28px;
   border-radius: 50%;
 }
-.online-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #23a55a;
-}
-.discord-toolbar-actions {
+.discord-context {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 9px;
   margin-left: auto;
   color: #b5bac1;
+  font-size: 17px;
 }
-.discord-toolbar-actions > svg {
+.discord-context svg {
   width: 22px;
-  height: 22px;
-}
-.discord-search {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 128px;
-  padding: 5px 8px;
-  background: #1e1f22;
-  border-radius: 4px;
-  color: #949ba4;
-  font-size: 14px;
-}
-.discord-search svg {
-  width: 16px;
-  height: 16px;
 }
 .messages {
   flex: 1;
   min-height: 0;
-  padding: 24px 20px;
+  padding: 28px;
   overflow: hidden;
 }
 .message {
@@ -681,30 +519,12 @@ a {
   align-items: center;
   gap: 14px;
   flex: 0 0 56px;
-  margin: 0 18px 18px;
+  margin: 0 28px 24px;
   padding: 0 16px;
   background: #383a40;
   border-radius: 8px;
   color: #949ba4;
   font-size: 19px;
-}
-.composer-add {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  background: #b5bac1;
-  border-radius: 50%;
-  color: #383a40;
-  font-size: 24px;
-  line-height: 1;
-}
-.composer-smile {
-  width: 25px;
-  height: 25px;
-  margin-left: auto;
-  color: #b5bac1;
 }
 .outro {
   padding-top: 45px;
